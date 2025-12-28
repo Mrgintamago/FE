@@ -8,13 +8,13 @@ const CartStyles = styled.div`
   position: absolute;
   top: 60px;
   right: 0;
-  border-radius: 10px;
+  border-radius: 12px;
   background-color: white;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition: all linear 0.25s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   &::before {
     content: "";
     width: 100%;
@@ -41,28 +41,36 @@ const Cart = () => {
 
   return (
     <CartStyles className="cart-child">
-      <div className="flex flex-col  p-5 h-[350px] overflow-hidden overflow-y-auto rounded-lg">
-        {product?.length > 0 &&
-          product.map((item) => <CartItem product={item} key={item.id} />)}
-        <div className="flex flex-col h-full justify-between">
-          <span className="border-2 border-dotted border-x-gray-500 w-full"></span>
-          <div className="w-full">
-            <div className="flex items-center justify-between py-3 text-black">
-              <span className="font-normal text-base">
-                Tổng tiền ({length}) sản phẩm
-              </span>
-              <span className=" text-lg font-semibold">
-                {formatPrice(total)}
-              </span>
-            </div>
-            <button
-              className="bg-blue-700 mt-2 rounded-lg mx-auto w-full py-2"
-              type="button"
-              onClick={() => navigate("/cart")}
-            >
-              Xem giỏ hàng
-            </button>
+      <div className="flex flex-col p-4 max-h-[450px] overflow-hidden">
+        {/* Header */}
+        <div className="pb-3 border-b border-gray-200 mb-3">
+          <h3 className="text-lg font-bold text-gray-800">Giỏ hàng của bạn</h3>
+          <p className="text-sm text-gray-500 mt-1">{length} sản phẩm</p>
+        </div>
+
+        {/* Cart Items */}
+        <div className="flex-1 overflow-y-auto pr-2 space-y-3 mb-4 custom-scrollbar">
+          {product?.length > 0 &&
+            product.map((item) => <CartItem product={item} key={item.id} />)}
+        </div>
+
+        {/* Footer */}
+        <div className="border-t border-gray-200 pt-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-base font-medium text-gray-700">
+              Tổng tiền:
+            </span>
+            <span className="text-xl font-bold text-[#1DC071]">
+              {formatPrice(total)}
+            </span>
           </div>
+          <button
+            className="w-full bg-gradient-to-r from-[#1DC071] to-[#a4d96c] text-white rounded-lg py-3 font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+            type="button"
+            onClick={() => navigate("/cart")}
+          >
+            Xem giỏ hàng
+          </button>
         </div>
       </div>
     </CartStyles>

@@ -18,7 +18,7 @@ const BestSellerItem = ({ product, onClickItem, className = "" }) => {
 
   return (
     <div
-      className={`best-seller-card flex flex-col rounded-lg p-2 sm:p-3 bg-white cursor-pointer relative shadow-md hover:shadow-lg transition-shadow min-h-[280px] sm:min-h-[300px] md:min-h-[320px] ${className}`}
+      className={`best-seller-card flex flex-col rounded-lg p-2 sm:p-3 bg-white cursor-pointer relative shadow-md hover:shadow-lg transition-shadow h-full min-h-[280px] sm:min-h-[300px] md:min-h-[320px] ${className}`}
       onClick={handleClick}
     >
       {product?.productType === "pre-order" && (
@@ -47,12 +47,14 @@ const BestSellerItem = ({ product, onClickItem, className = "" }) => {
       </div>
 
       {/* Title - Always visible at bottom */}
-      <h3 className="line-clamp-2 text-[11px] xs:text-xs sm:text-sm font-medium text-gray-800 text-center px-1 mb-1 flex-1">
-        {product?.title}
-      </h3>
+      <div className="flex flex-col flex-1 min-h-0">
+        <h3 className="line-clamp-2 text-[11px] xs:text-xs sm:text-sm font-medium text-gray-800 text-center px-1 mb-1">
+          {product?.title}
+        </h3>
+      </div>
       
       {/* Price Section */}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 mt-auto">
         {/* Main Price */}
         <p className="text-sm sm:text-base font-bold text-red-600 text-center px-1">
           {formatPrice(product?.promotion || product?.price)}

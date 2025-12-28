@@ -4,18 +4,35 @@ import { FaStar } from "react-icons/fa";
 
 const StatisticFeedback = ({ data }) => {
   const stars = Array(5).fill(0);
+  const hasRatings = data?.ratingsQuantity > 0;
+  const averageRating = hasRatings ? (data.ratingsAverage || 0) : 0;
+  
+  // Hiển thị số nguyên khi không có đánh giá, số thập phân khi có đánh giá
+  const displayRating = hasRatings ? averageRating.toFixed(1) : "0";
+  
   return (
     <div className="w-full bg-white rounded-lg mx-auto mt-6 border-2 border-solid feelback flex flex-col">
       {/* Left section - Summary */}
       <div className="flex flex-col items-center justify-center border-b border-solid py-6 px-3 sm:px-6">
-        <span className="text-2xl sm:text-3xl font-bold">{data.ratingsAverage} / 5</span>
+        <span className="text-2xl sm:text-3xl font-bold">{displayRating} / 5</span>
         <span className="flex items-center justify-center gap-x-2 sm:gap-x-3 mt-3">
-          {stars.map((item, index) => (
-            <FaStar key={index} color="#ffba5a" size={16} className="sm:w-5 sm:h-5" />
-          ))}
+          {stars.map((item, index) => {
+            const starValue = index + 1;
+            const isFilled = hasRatings && averageRating >= starValue;
+            const isHalfFilled = hasRatings && averageRating >= index + 0.5 && averageRating < starValue;
+            
+            return (
+              <FaStar 
+                key={index} 
+                color={isFilled || isHalfFilled ? "#ffba5a" : "#d1d5db"} 
+                size={16} 
+                className="sm:w-5 sm:h-5" 
+              />
+            );
+          })}
         </span>
         <span className="mt-3 text-sm sm:text-base text-center">
-          {data.ratingsQuantity} đánh giá
+          {data?.ratingsQuantity || 0} đánh giá
         </span>
       </div>
       

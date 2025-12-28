@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Profile from "../profile/Profile";
 import Swal from "sweetalert2";
 import userApi from "../../api/userApi";
+import axiosClient from "../../api/axiosClient";
 import { logout } from "../../redux/auth/userSlice";
 import Cart from "../cart/Cart";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
@@ -47,18 +48,40 @@ const Navbar = () => {
       cancelButtonText: "Không",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // Clear frontend state FIRST (before API call) to prevent token from being sent
+        console.log("🔄 Clearing frontend state...");
+        
+        // Remove token from localStorage IMMEDIATELY
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("user");
+        localStorage.removeItem("tokenStream");
+        sessionStorage.removeItem("jwt");
+        sessionStorage.removeItem("user");
+        
+        // Remove Authorization header from axiosClient IMMEDIATELY
+        delete axiosClient.defaults.headers.common["Authorization"];
+        console.log("✅ Token and header cleared immediately");
+        
+        // Now call logout API (no token will be sent)
         try {
-          // Call logout API FIRST to blacklist token on backend
-          await userApi.logout();
+          const logoutResponse = await userApi.logout();
+          console.log("✅ Logout API response:", logoutResponse);
         } catch (error) {
-          console.error("Logout API error:", error);
-        } finally {
-          // Then clear frontend state
-          const action = logout();
-          dispatch(action);
-          navigate("/");
-          Swal.fire("Tạm biệt! Hẹn gặp lại quý khách");
+          console.error("⚠️ Logout API error:", error);
         }
+        
+        // Clear Redux state
+        const action = logout();
+        dispatch(action);
+        console.log("✅ Redux state cleared");
+        
+        // Navigate to home
+        navigate("/");
+        
+        // Show success message
+        setTimeout(() => {
+          Swal.fire("Tạm biệt! Hẹn gặp lại quý khách");
+        }, 300);
       }
     });
   };
@@ -143,7 +166,7 @@ const Navbar = () => {
               />
             </div>
             <span className="shop-name-white text-white text-sm sm:text-lg md:text-2xl ml-1 font-normal hidden sm:inline" title="Trang chủ" style={{ fontFamily: "'Righteous', cursive", letterSpacing: '1px' }}>
-              TQN
+              TQN Shop
             </span>
           </Link>
         </div>
@@ -211,29 +234,40 @@ const Navbar = () => {
 
         {/* Cart */}
         <div
-          className="relative flex items-center gap-0.5 sm:gap-2 cart-home cursor-pointer flex-shrink-0"
+          className="relative flex items-center gap-1 sm:gap-2 cart-home cursor-pointer flex-shrink-0 group"
           onMouseOver={hanleMouseOver}
           onMouseOut={hanleMouseOut}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 text-white cursor-pointer"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-            />
-          </svg>
-          <div className="hidden sm:flex flex-col items-start justify-between">
-            <span className="font-medium text-xs md:text-sm whitespace-nowrap">Giỏ hàng</span>
-            <span className="font-medium text-xs md:text-sm whitespace-nowrap">
-              ({cart?.length || 0})
+          <div className="relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 text-white cursor-pointer transition-transform group-hover:scale-110"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+              />
+            </svg>
+            {cart?.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                {cart.length > 9 ? '9+' : cart.length}
+              </span>
+            )}
+          </div>
+          <div className="hidden sm:flex flex-col items-start">
+            <span className="font-semibold text-xs md:text-sm whitespace-nowrap text-white group-hover:text-yellow-400 transition-colors">
+              Giỏ hàng
             </span>
+            {cart?.length > 0 && (
+              <span className="text-xs text-yellow-400 font-medium">
+                {cart.length} sản phẩm
+              </span>
+            )}
           </div>
           {cart?.length > 0 ? <Cart /> : <CartHollow />}
         </div>

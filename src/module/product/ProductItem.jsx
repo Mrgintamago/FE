@@ -11,7 +11,7 @@ const ProductItem = ({
 
   return (
     <div
-      className={`product-card flex flex-col rounded-lg p-2 sm:p-3 bg-white cursor-pointer relative shadow-md hover:shadow-lg transition-shadow min-h-[240px] sm:min-h-[280px] md:min-h-[320px] ${className}`}
+      className={`product-card flex flex-col rounded-lg p-2 sm:p-3 bg-white cursor-pointer relative shadow-md hover:shadow-lg transition-shadow h-full min-h-[280px] sm:min-h-[300px] md:min-h-[320px] ${className}`}
       onClick={onClickItem}
     >
       {product?.productType === "pre-order" && (
@@ -35,8 +35,8 @@ const ProductItem = ({
           loading="lazy"
         />
       </div>
-      <div className="flex flex-col flex-1">
-        <h3 className="line-clamp-2 mb-1 text-[11px] xs:text-xs sm:text-sm font-medium flex-1">
+      <div className="flex flex-col flex-1 min-h-0">
+        <h3 className="line-clamp-2 mb-1 text-[11px] xs:text-xs sm:text-sm font-medium">
           {product?.title}
         </h3>
         {product?.inventory < 5 && product?.inventory > 0 && (

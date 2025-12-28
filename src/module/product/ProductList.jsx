@@ -19,8 +19,8 @@ const ProductList = ({ data, handlePageClick, page, totalPage }) => {
 
   return (
     <>
-      <div className="mt-32 md:mt-40 animate-fade-in-up">
-        <div className="flex flex-col container rounded-lg bg-white shadow-lg overflow-hidden">
+      <div className="mt-4 sm:mt-6 lg:mt-8 animate-fade-in-up">
+        <div className="flex flex-col container mx-auto px-4 sm:px-6 rounded-lg bg-white shadow-lg overflow-hidden">
           <div className="flex items-center justify-between p-5 bg-red-800 rounded-t-lg">
             <span className="shop-name-white text-3xl font-bold animate-slide-in-left">Figure</span>
             <div className="flex items-center gap-x-1 cursor-pointer hover-scale animate-slide-in-right">

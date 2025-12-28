@@ -20,15 +20,15 @@ const ProductListHome = ({ data, bg = "", className = "", title = "", loading = 
   return (
     <div className={`${className} animate-fade-in-up`}>
       {title && (
-        <div className="container mb-2 sm:mb-3 md:mb-4">
+        <div className="mb-3 sm:mb-4">
           <div className="flex items-center gap-x-2 sm:gap-x-3">
-            <span className="w-2 h-6 sm:h-8 bg-red-600 rounded-full block" />
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800">{title}</h2>
+            <span className="w-2 h-6 sm:h-7 bg-red-600 rounded-full block flex-shrink-0" />
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">{title}</h2>
           </div>
         </div>
       )}
       <div
-        className={`container ${
+        className={`relative ${
           bg === "bg1" ? 'bg-[url("../images/bg.png")]' : ""
         }
         ${bg === "bg2" ? 'bg-[url("../images/bg2.png")]' : ""}
@@ -43,36 +43,41 @@ const ProductListHome = ({ data, bg = "", className = "", title = "", loading = 
             modules={[Navigation, Pagination, EffectCards]}
             slidesPerView={1}
             slidesPerGroup={1}
-            spaceBetween={2}
+            spaceBetween={8}
             breakpoints={{
+              360: {
+                slidesPerView: 1.3,
+                slidesPerGroup: 1,
+                spaceBetween: 8,
+              },
               480: {
                 slidesPerView: 1.5,
                 slidesPerGroup: 1,
-                spaceBetween: 3,
+                spaceBetween: 10,
               },
               640: {
                 slidesPerView: 2,
                 slidesPerGroup: 2,
-                spaceBetween: 4,
+                spaceBetween: 12,
               },
               768: {
                 slidesPerView: 3,
                 slidesPerGroup: 3,
-                spaceBetween: 4,
+                spaceBetween: 12,
               },
               1024: {
                 slidesPerView: 5,
                 slidesPerGroup: 5,
-                spaceBetween: 4,
+                spaceBetween: 12,
               },
             }}
             navigation
             pagination={{ clickable: true }}
-            className="w-full h-full"
+            className="w-full h-full py-8 sm:py-10"
           >
             {data && data.length > 0 &&
               data.map((item) => (
-                <SwiperSlide key={item._id || item.id}>
+                <SwiperSlide key={item._id || item.id} className="w-full flex items-center justify-center !h-auto">
                   <ProdictItem
                     product={item}
                     onClickItem={() => handleClick(item)}

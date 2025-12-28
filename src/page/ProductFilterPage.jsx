@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import FilterProduct from "../module/filter/FilterProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { action_status } from "../utils/constants/status";
@@ -17,6 +17,7 @@ import Skeleton from "../components/skeleton/Skeleton";
 import SkeletonItem from "../components/skeleton/SkeletonItem";
 
 const ProductFilterPage = () => {
+  const location = useLocation();
   const params = queryString.parse(location.search);
   const { productFilter, statusFilter, totalPageFilter, statusBrand, brand, statusCategory, category } =
     useSelector((state) => state.product);
@@ -94,42 +95,77 @@ const ProductFilterPage = () => {
   }, [dispatch, statusBrand, statusCategory]);
 
   const initFilter = {
-    brand: params?.brand?.split(",") || [],
-    category: params?.category?.split(",") || [],
+    brand: params?.brand ? (Array.isArray(params.brand) ? params.brand : params.brand.split(",")) : [],
+    category: params?.category ? (Array.isArray(params.category) ? params.category : params.category.split(",")) : [],
   };
 
   const [filter, setFilter] = useState(initFilter);
 
   const filterSelect = (type, checked, item) => {
+    let newFilter = { ...filter };
+    
     if (checked) {
       switch (type) {
         case "Brands":
-          setFilter({
+          newFilter = {
             ...filter,
             brand: [...filter.brand, item.id],
-          });
+          };
           break;
         case "Categories":
-          setFilter({
+          newFilter = {
             ...filter,
             category: [...filter.category, item.id],
-          });
+          };
           break;
         default:
       }
     } else {
       switch (type) {
         case "Brands":
-          const newBrands = filter.brand.filter((e) => e !== item.id);
-          setFilter({ ...filter, brand: newBrands });
+          newFilter = {
+            ...filter,
+            brand: filter.brand.filter((e) => e !== item.id),
+          };
           break;
         case "Categories":
-          const newCategories = filter.category.filter((e) => e !== item.id);
-          setFilter({ ...filter, category: newCategories });
+          newFilter = {
+            ...filter,
+            category: filter.category.filter((e) => e !== item.id),
+          };
           break;
         default:
       }
     }
+    
+    // Apply filter ngay lập tức
+    setFilter(newFilter);
+    
+    // Tạo filters object để update URL
+    const filters = { ...queryParams, page: 1 };
+    
+    // Thêm hoặc xóa brand filter
+    if (newFilter.brand.length > 0) {
+      filters.brand = newFilter.brand.join(",");
+    } else {
+      delete filters.brand;
+    }
+    
+    // Thêm hoặc xóa category filter
+    if (newFilter.category.length > 0) {
+      filters.category = newFilter.category.join(",");
+    } else {
+      delete filters.category;
+    }
+    
+    // Navigate với filter mới
+    navigate({
+      pathname: "/product",
+      search: queryString.stringify(filters, {
+        skipNull: true,
+        skipEmptyString: true,
+      }),
+    });
   };
 
   const handlePageClick = (values) => {
@@ -158,27 +194,22 @@ const ProductFilterPage = () => {
     });
   };
 
+  // Sync filter state với URL params khi URL thay đổi từ bên ngoài (như price filter)
   useEffect(() => {
-    const filters = { ...queryParams, page: 1 };
+    const currentBrands = params?.brand ? (Array.isArray(params.brand) ? params.brand : params.brand.split(",")) : [];
+    const currentCategories = params?.category ? (Array.isArray(params.category) ? params.category : params.category.split(",")) : [];
     
-    // Chỉ thêm filter nếu có giá trị
-    if (filter.brand.length > 0) {
-      filters.brand = filter.brand;
-    }
-    if (filter.category.length > 0) {
-      filters.category = filter.category;
-    }
+    // Chỉ update nếu khác với state hiện tại (tránh infinite loop)
+    const brandsChanged = JSON.stringify([...currentBrands].sort()) !== JSON.stringify([...filter.brand].sort());
+    const categoriesChanged = JSON.stringify([...currentCategories].sort()) !== JSON.stringify([...filter.category].sort());
     
-    setPage(1);
-    navigate({
-      pathname: "/product",
-      search: queryString.stringify(filters, {
-        arrayFormat: "comma",
-        skipNull: true,
-        skipEmptyString: true,
-      }),
-    });
-  }, [filter.brand, filter.category, queryParams, navigate]);
+    if (brandsChanged || categoriesChanged) {
+      setFilter({
+        brand: currentBrands,
+        category: currentCategories,
+      });
+    }
+  }, [location.search]);
 
   return (
     <>

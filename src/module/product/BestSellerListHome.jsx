@@ -11,8 +11,8 @@ import SkeletonItem from "../../components/skeleton/SkeletonItem";
 const BestSellerListHome = ({ data, className = "", loading = false }) => {
   return (
     <div className={`${className} animate-fade-in-up`}>
-      {/* Carousel Container - Pushed down */}
-      <div className="w-full bg-[url('../images/bg.png')] bg-no-repeat bg-cover rounded-lg shadow-lg overflow-hidden min-h-[420px] sm:min-h-[480px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 md:pt-10">
+      {/* Carousel Container */}
+      <div className="relative w-full bg-[url('../images/bg.png')] bg-no-repeat bg-cover rounded-lg shadow-lg overflow-hidden min-h-[420px] sm:min-h-[480px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 md:pt-10">
         {loading ? (
           <div className="p-5">
             <SkeletonItem className="sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5" totalItem={5} />
