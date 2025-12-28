@@ -3,6 +3,7 @@ import Banner from "../components/banner/Banner";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ProductListHome from "../module/product/ProductListHome";
+import BestSellerListHome from "../module/product/BestSellerListHome";
 import BackToTopButton from "../components/backtotop/BackToTopButton";
 import ProductList from "../module/product/ProductList";
 import { useDispatch, useSelector } from "react-redux";
@@ -237,11 +238,9 @@ const HomePage = () => {
               </div>
             )}
           </div>
-          <ProductListHome 
+          <BestSellerListHome 
             data={bestSeller} 
-            bg="bg1" 
             className="py-8 sm:py-12 md:py-16 lg:py-20" 
-            title="Best Seller"
             loading={loadingBestSeller}
           />
           <ProductListHome 
