@@ -19,7 +19,10 @@ function saveTokenToLocalStorage(response) {
   const token = response?.accessToken || response?.token;
   if (token && token !== "undefined") {
     localStorage.setItem(StorageKeys.TOKEN, token);
+    // Update axiosClient header immediately
+    axiosClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     console.log("✅ Token saved to localStorage:", token.substring(0, 20) + "...");
+    console.log("✅ Authorization header updated in axiosClient");
   } else {
     console.warn("❌ No token in response. accessToken:", response?.accessToken, "| token:", response?.token);
     console.warn("📦 Full response:", response);
