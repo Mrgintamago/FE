@@ -93,74 +93,79 @@ const Feelback = ({ id, data }) => {
   return (
     <div className="mt-10">
       {status === action_status.LOADING && (
-        <div className="container bg-white rounded-lg p-5">
-          <Skeleton className="w-2/3 h-5 rounded-md" />
-          <div className="w-[1200px] h-[350px] bg-white rounded-lg mx-auto mt-6  border-2 border-solid feelback">
-            <div className="flex flex-col items-center justify-center border-r-2 border-solid">
-              <div className="flex items-center gap-x-5 mb-5">
-                <Skeleton className="w-5 h-5 rounded-md" />
+        <div className="container bg-white rounded-lg p-3 sm:p-5">
+          <Skeleton className="w-2/3 h-4 sm:h-5 rounded-md" />
+          <div className="w-full bg-white rounded-lg mx-auto mt-4 sm:mt-6 border-2 border-solid feelback flex flex-col md:flex-row">
+            <div className="flex flex-col items-center justify-center border-b md:border-b-0 md:border-r-2 border-solid py-4 md:py-0 md:px-4 flex-shrink-0">
+              <div className="flex items-center gap-x-2 sm:gap-x-3 mb-3">
+                <Skeleton className="w-4 h-4 rounded-md" />
                 <span>/</span>
-                <Skeleton className="w-5 h-5 rounded-md" />
+                <Skeleton className="w-4 h-4 rounded-md" />
               </div>
-              <div className="flex items-center gap-x-5">
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-5 h-5 rounded-md" />
+              <div className="flex items-center gap-x-3">
+                <Skeleton className="w-4 h-4 rounded-md" />
+                <Skeleton className="w-4 h-4 rounded-md" />
+                <Skeleton className="w-4 h-4 rounded-md" />
+                <Skeleton className="w-4 h-4 rounded-md" />
+                <Skeleton className="w-4 h-4 rounded-md" />
               </div>
             </div>
-            <div className="flex flex-col items-center justify-center gap-y-5">
-              <div className="flex flex-row items-center justify-between gap-x-5 ">
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-[700px] h-5 rounded-md" />
+            <div className="flex flex-col items-stretch justify-center gap-y-2 sm:gap-y-3 px-3 sm:px-4 py-4 md:py-0 flex-1">
+              <div className="flex flex-row items-center justify-between gap-x-2">
+                <Skeleton className="w-4 h-4 rounded-md flex-shrink-0" />
+                <Skeleton className="h-3 rounded-md flex-1" />
+                <Skeleton className="w-8 h-3 rounded-md flex-shrink-0" />
               </div>
-              <div className="flex flex-row items-center justify-between gap-x-5 ">
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-[700px] h-5 rounded-md" />
+              <div className="flex flex-row items-center justify-between gap-x-2">
+                <Skeleton className="w-4 h-4 rounded-md flex-shrink-0" />
+                <Skeleton className="h-3 rounded-md flex-1" />
+                <Skeleton className="w-8 h-3 rounded-md flex-shrink-0" />
               </div>
-              <div className="flex flex-row items-center justify-between gap-x-5 ">
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-[700px] h-5 rounded-md" />
+              <div className="flex flex-row items-center justify-between gap-x-2">
+                <Skeleton className="w-4 h-4 rounded-md flex-shrink-0" />
+                <Skeleton className="h-3 rounded-md flex-1" />
+                <Skeleton className="w-8 h-3 rounded-md flex-shrink-0" />
               </div>
-              <div className="flex flex-row items-center justify-between gap-x-5 ">
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-[700px] h-5 rounded-md" />
+              <div className="flex flex-row items-center justify-between gap-x-2">
+                <Skeleton className="w-4 h-4 rounded-md flex-shrink-0" />
+                <Skeleton className="h-3 rounded-md flex-1" />
+                <Skeleton className="w-8 h-3 rounded-md flex-shrink-0" />
               </div>
-              <div className="flex flex-row items-center justify-between gap-x-5 ">
-                <Skeleton className="w-5 h-5 rounded-md" />
-                <Skeleton className="w-[700px] h-5 rounded-md" />
+              <div className="flex flex-row items-center justify-between gap-x-2">
+                <Skeleton className="w-4 h-4 rounded-md flex-shrink-0" />
+                <Skeleton className="h-3 rounded-md flex-1" />
+                <Skeleton className="w-8 h-3 rounded-md flex-shrink-0" />
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-[1200px] mx-auto mt-10">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center justify-start gap-x-5">
-                <Skeleton className="w-12 h-12 rounded-full" />
-                <Skeleton className="w-[200px] h-4 rounded-md" />
+          <div className="flex flex-col w-full mx-auto mt-6 sm:mt-10">
+            <div className="flex items-center justify-between flex-wrap gap-3">
+              <div className="flex items-center justify-start gap-x-3">
+                <Skeleton className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex-shrink-0" />
+                <Skeleton className="w-32 sm:w-48 h-3 sm:h-4 rounded-md" />
               </div>
-              <div className="flex items-center justify-end gap-x-5">
-                <Skeleton className="w-[80px] h-4 rounded-md" />
-                <Skeleton className="w-[80px] h-4 rounded-md" />
+              <div className="flex items-center justify-end gap-x-3">
+                <Skeleton className="w-16 h-3 rounded-md" />
+                <Skeleton className="w-16 h-3 rounded-md" />
               </div>
             </div>
-            <Skeleton className="w-[300px] h-4 mt-4 rounded-md" />
-            <Skeleton className="w-[600px] h-4 mt-4 rounded-md" />
+            <Skeleton className="w-24 h-3 mt-3 rounded-md" />
+            <Skeleton className="w-48 h-3 mt-3 rounded-md" />
           </div>
         </div>
       )}
       {status === action_status.SUCCEEDED && (
         <>
           {" "}
-          <div className="container bg-white rounded-lg p-5">
-            <span className="text-xl font-bold">
+          <div className="container bg-white rounded-lg p-3 sm:p-5">
+            <span className="text-lg sm:text-xl font-bold">
               Đánh giá & nhận xét {data?.title}
             </span>
             <StatisticFeedback data={feedback} />
-            <div className="flex flex-col items-center gap-y-5 py-5">
-              <span className="text-xl ">Bạn đánh giá sao sản phẩm này</span>
+            <div className="flex flex-col items-center gap-y-4 py-4 sm:py-5">
+              <span className="text-base sm:text-lg">Bạn đánh giá sao sản phẩm này</span>
               <button
-                className="text-lg py-3 px-10 rounded-lg font-medium text-white bg-red-600"
+                className="text-sm sm:text-lg py-2 sm:py-3 px-6 sm:px-10 rounded-lg font-medium text-white bg-red-600 hover:bg-red-700 transition-colors"
                 onClick={handleClick}
               >
                 Đánh giá ngay
@@ -187,7 +192,7 @@ const Feelback = ({ id, data }) => {
             onClose={() => {
               setShowModal(false);
             }}
-            bodyClassName="w-[600px] bg-white p-10 rounded-lg relative z-10 content h-[600px] overflow-y-auto overflow-x-hidden"
+            bodyClassName="w-11/12 sm:w-[600px] bg-white p-6 sm:p-10 rounded-lg relative z-10 content max-h-[90vh] overflow-y-auto overflow-x-hidden"
           >
             <Rating
               onClose={handleClose}

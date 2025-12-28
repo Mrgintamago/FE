@@ -124,7 +124,13 @@ axiosClient.interceptors.response.use(
       status == 404 ||
       status == 403
     ) {
-      throw new Error(data.message);
+      // Create enhanced error with additional login-specific information
+      const enhancedError = new Error(data.message);
+      enhancedError.code = data.code;
+      enhancedError.remainingAttempts = data.remainingAttempts;
+      enhancedError.lockUntilMinutes = data.lockUntilMinutes;
+      enhancedError.lockUntil = data.lockUntil;
+      throw enhancedError;
     }
     return Promise.reject(error);
   }

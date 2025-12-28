@@ -11,7 +11,7 @@ const ProductItem = ({
 
   return (
     <div
-      className={`product-card flex flex-col rounded-lg p-2 sm:p-3 bg-white cursor-pointer relative shadow-md hover:shadow-lg transition-shadow min-h-[280px] sm:min-h-[300px] md:min-h-[320px] ${className}`}
+      className={`product-card flex flex-col rounded-lg p-2 sm:p-3 bg-white cursor-pointer relative shadow-md hover:shadow-lg transition-shadow min-h-[240px] sm:min-h-[280px] md:min-h-[320px] ${className}`}
       onClick={onClickItem}
     >
       {product?.productType === "pre-order" && (

@@ -10,7 +10,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: false, // Disable sourcemap trên production để giảm size
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {

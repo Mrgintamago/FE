@@ -3,24 +3,153 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 const SidebarStyles = styled.div`
-  width: 300px;
+  width: 100%;
   background: #ffffff;
   box-shadow: 10px 10px 20px rgba(218, 213, 213, 0.15);
-  border-radius: 12px;
+  border-radius: 8px;
+  padding: 6px;
 
   .menu-item {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 14px 20px;
+    gap: 8px;
+    padding: 6px 8px;
     font-weight: 500;
+    font-size: 11px;
     color: #808191;
-    margin-bottom: 20px;
+    margin-bottom: 6px;
     cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     &.active,
     &:hover {
       background: #f1fbf7;
       color: #1dc071;
+    }
+  }
+
+  .menu-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    flex-shrink: 0;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .menu-text {
+    display: inline;
+    word-break: break-word;
+  }
+
+  > .flex {
+    gap: 6px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    .w-\\[100px\\] {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+    }
+    .font-semibold {
+      font-size: 10px;
+      display: inline;
+      word-break: break-word;
+    }
+  }
+
+  @media (min-width: 640px) {
+    padding: 8px;
+    .menu-item {
+      gap: 10px;
+      padding: 8px 10px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .menu-icon {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+    }
+    > .flex {
+      gap: 8px;
+      margin-bottom: 8px;
+      .w-\\[100px\\] {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+      }
+      .font-semibold {
+        font-size: 11px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 250px;
+    padding: 12px;
+    .menu-item {
+      gap: 14px;
+      padding: 12px 14px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }
+    .menu-icon {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+    }
+    > .flex {
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: nowrap;
+      .w-\\[100px\\] {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+      }
+      .font-semibold {
+        font-size: 13px;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    width: 300px;
+    padding: 16px;
+    .menu-item {
+      gap: 20px;
+      padding: 14px 20px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .menu-icon {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+    }
+    > .flex {
+      gap: 16px;
+      margin-bottom: 16px;
+      .w-\\[100px\\] {
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
+      }
+      .font-semibold {
+        font-size: 16px;
+      }
     }
   }
 `;

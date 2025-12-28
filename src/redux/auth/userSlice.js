@@ -15,14 +15,11 @@ function getCookie(name) {
 
 // Helper to extract token from response OR cookies
 function saveTokenToLocalStorage(response) {
-  console.log("🔍 Response structure:", response);
   const token = response?.accessToken || response?.token;
   if (token && token !== "undefined") {
     localStorage.setItem(StorageKeys.TOKEN, token);
     // Update axiosClient header immediately
     axiosClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    console.log("✅ Token saved to localStorage:", token.substring(0, 20) + "...");
-    console.log("✅ Authorization header updated in axiosClient");
   } else {
     console.warn("❌ No token in response. accessToken:", response?.accessToken, "| token:", response?.token);
     console.warn("📦 Full response:", response);
@@ -84,7 +81,6 @@ export const changeState = createAsyncThunk(
 export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async (payload) => {
-    console.log(payload);
     const response = await userApi.resetPassword(payload, payload.token);
     localStorage.setItem("tokenStream", response.tokenStream);
     saveTokenToLocalStorage(response);
@@ -187,17 +183,19 @@ export const getUser = createAsyncThunk("user/getUser", async () => {
   return response.data.data;
 });
 
+const initialState = {
+  current:
+    JSON.parse(localStorage.getItem(StorageKeys.USER)) ||
+    JSON.parse(sessionStorage.getItem(StorageKeys.USER)) ||
+    null,
+  status: action_status.IDLE,
+  user: {},
+  update: false,
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    current:
-      JSON.parse(localStorage.getItem(StorageKeys.USER)) ||
-      JSON.parse(sessionStorage.getItem(StorageKeys.USER)) ||
-      null,
-    status: action_status.IDLE,
-    user: {},
-    update: false,
-  },
+  initialState,
   reducers: {
     logout(state) {
       localStorage.removeItem(StorageKeys.TOKEN);
@@ -219,49 +217,50 @@ const userSlice = createSlice({
       state.update = false;
     },
   },
-  extraReducers: {
-    [register.fulfilled]: (state, action) => {
-      state.current = action.payload;
-    },
-    [login.fulfilled]: (state, action) => {
-      state.current = action.payload;
-    },
-    [loginWithGoogle.fulfilled]: (state, action) => {
-      state.current = action.payload;
-      state.user = action.payload;
-    },
-    [verify.fulfilled]: (state, action) => {
-      state.current = action.payload;
-    },
-    [changeState.fulfilled]: (state, action) => {
-      state.current = action.payload;
-    },
-    [resetPassword.fulfilled]: (state, action) => {
-      state.current = action.payload;
-    },
-    [getUser.pending]: (state, action) => {
-      state.status = action_status.LOADING;
-    },
-    [getUser.fulfilled]: (state, action) => {
-      state.status = action_status.SUCCEEDED;
-      state.user = action.payload;
-      state.current = action.payload;
-    },
-    [getUser.rejected]: (state, action) => {
-      state.status = action_status.FAILED;
-    },
-    [updateInfoUser.pending]: (state, action) => {
-      state.status = action_status.LOADING;
-    },
-    [updateInfoUser.fulfilled]: (state, action) => {
-      state.update = true;
-      state.current = action.payload;
-      state.user = action.payload;
-      state.status = action_status.SUCCEEDED;
-    },
-    [updateInfoUser.rejected]: (state, action) => {
-      state.status = action_status.FAILED;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.fulfilled, (state, action) => {
+        state.current = action.payload;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.current = action.payload;
+      })
+      .addCase(loginWithGoogle.fulfilled, (state, action) => {
+        state.current = action.payload;
+        state.user = action.payload;
+      })
+      .addCase(verify.fulfilled, (state, action) => {
+        state.current = action.payload;
+      })
+      .addCase(changeState.fulfilled, (state, action) => {
+        state.current = action.payload;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.current = action.payload;
+      })
+      .addCase(getUser.pending, (state, action) => {
+        state.status = action_status.LOADING;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.status = action_status.SUCCEEDED;
+        state.user = action.payload;
+        state.current = action.payload;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.status = action_status.FAILED;
+      })
+      .addCase(updateInfoUser.pending, (state, action) => {
+        state.status = action_status.LOADING;
+      })
+      .addCase(updateInfoUser.fulfilled, (state, action) => {
+        state.update = true;
+        state.current = action.payload;
+        state.user = action.payload;
+        state.status = action_status.SUCCEEDED;
+      })
+      .addCase(updateInfoUser.rejected, (state, action) => {
+        state.status = action_status.FAILED;
+      });
   },
 });
 

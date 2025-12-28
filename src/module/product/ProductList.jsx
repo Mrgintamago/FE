@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import ProductItem from "./ProductItem";
 import slugify from "slugify";
 import Pagination from "react-js-pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination as SwiperPagination } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const ProductList = ({ data, handlePageClick, page, totalPage }) => {
   const navigate = useNavigate();
@@ -41,7 +46,7 @@ const ProductList = ({ data, handlePageClick, page, totalPage }) => {
               </svg>
             </div>
           </div>
-          <div className="grid-cols-5 grid gap-y-2 pb-10 items-stretch">
+          <div className="hidden md:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-2 pb-10 items-stretch">
             {data.length > 0 &&
               data.map((item, index) => (
                 <div
@@ -56,6 +61,41 @@ const ProductList = ({ data, handlePageClick, page, totalPage }) => {
                   />
                 </div>
               ))}
+          </div>
+
+          {/* Swiper for mobile view */}
+          <div className="md:hidden pb-10">
+            <Swiper
+              modules={[Navigation, SwiperPagination]}
+              spaceBetween={10}
+              slidesPerView={1.5}
+              breakpoints={{
+                480: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 12,
+                },
+              }}
+              navigation
+              pagination={{ clickable: true }}
+              className="swiper-container"
+            >
+              {data.length > 0 &&
+                data.map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="animate-fade-in-up">
+                      <ProductItem
+                        product={item}
+                        onClickItem={() => handleClick(item)}
+                        className="border-2 border-solid border-[#f6f6f6]"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
           </div>
         </div>
         <div className="flex justify-center items-center mt-5 animate-fade-in">

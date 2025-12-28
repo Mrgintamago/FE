@@ -109,12 +109,13 @@ const Navbar = () => {
   }, [show]);
 
   return (
-    <nav className=" bg-primary h-16 sm:h-[80px] sticky z-50 shadow-md transition-all top-0 text-white -translate-y-0.5 ">
-      <div className="container flex items-center h-full justify-between gap-2 sm:gap-4">
-        <div className="flex items-center justify-center gap-1 sm:gap-2 flex-shrink-0">
+    <nav className="bg-primary h-14 sm:h-16 md:h-20 sticky z-50 shadow-md transition-all top-0 text-white -translate-y-0.5">
+      <div className="container flex items-center h-full justify-between gap-1 sm:gap-2 md:gap-4 px-2 sm:px-4">
+        {/* Logo Section */}
+        <div className="flex items-center justify-center gap-1 flex-shrink-0">
           <Link
             title="Tất cả sản phẩm"
-            className="cursor-pointer hidden sm:block"
+            className="cursor-pointer hidden sm:block p-1"
             to="/product"
           >
             <svg
@@ -123,7 +124,7 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="w-8 sm:w-10 h-8 sm:h-10 text-white"
+              className="w-6 sm:w-8 h-6 sm:h-8 text-white"
             >
               <path
                 strokeLinecap="round"
@@ -133,7 +134,7 @@ const Navbar = () => {
             </svg>
           </Link>
           <Link to="/" className="flex items-center flex-shrink-0">
-            <div className="w-12 sm:w-[60px] h-12 sm:h-[60px] flex items-center justify-center">
+            <div className="w-10 sm:w-12 md:w-14 h-10 sm:h-12 md:h-14 flex items-center justify-center">
               <img
                 src="/images/logo.png"
                 alt="logo"
@@ -141,24 +142,25 @@ const Navbar = () => {
                 title="Trang chủ"
               />
             </div>
-            <span className="shop-name-white text-white text-xl sm:text-3xl ml-1 sm:ml-2 font-normal hidden sm:inline" title="Trang chủ" style={{ fontFamily: "'Righteous', cursive", letterSpacing: '2px' }}>
-              TQN Figure
+            <span className="shop-name-white text-white text-sm sm:text-lg md:text-2xl ml-1 font-normal hidden sm:inline" title="Trang chủ" style={{ fontFamily: "'Righteous', cursive", letterSpacing: '1px' }}>
+              TQN
             </span>
           </Link>
         </div>
 
-        <div className="flex-1 flex items-center relative min-w-0" ref={nodeRef}>
+        {/* Search Section */}
+        <div className="flex-1 flex items-center relative min-w-0 mx-0.5 sm:mx-2" ref={nodeRef}>
           <input
             type="text"
-            className="py-2 sm:py-3 px-3 sm:px-4 rounded-l-lg text-xs sm:text-base flex-1 text-black"
+            className="py-1.5 sm:py-2 md:py-3 px-2 sm:px-3 md:px-4 rounded-l-lg text-xs sm:text-sm md:text-base flex-1 text-black placeholder-gray-500 outline-none focus:ring-2 focus:ring-yellow-400"
             id="search"
-            placeholder="Tìm figure..."
+            placeholder="Tìm..."
             onClick={handleClick}
             onChange={handleChange}
             value={keyword}
           />
           <div
-            className="w-10 sm:w-[50px] bg-yellow-400 h-10 sm:h-[48px] rounded-r-lg flex items-center justify-center cursor-pointer flex-shrink-0"
+            className="w-8 sm:w-10 md:w-12 bg-yellow-400 h-8 sm:h-10 md:h-12 rounded-r-lg flex items-center justify-center cursor-pointer flex-shrink-0"
             onClick={handleClickSearch}
           >
             <svg
@@ -167,7 +169,7 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="w-5 sm:w-6 h-5 sm:h-6"
+              className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6"
             >
               <path
                 strokeLinecap="round"
@@ -181,10 +183,11 @@ const Navbar = () => {
           )}
         </div>
 
+        {/* User Login */}
         {!isLoggedIn ? (
           <Link
             to="/sign-in"
-            className="flex items-center justify-center hover:text-yellow-400 flex-shrink-0"
+            className="flex items-center justify-center hover:text-yellow-400 flex-shrink-0 p-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +195,7 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="w-6 sm:w-8 h-6 sm:h-8 text-white"
+              className="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 text-white"
             >
               <path
                 strokeLinecap="round"
@@ -200,13 +203,15 @@ const Navbar = () => {
                 d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <span className="px-1 sm:px-2 font-medium text-xs sm:text-base hidden sm:inline">Đăng nhập</span>
+            <span className="px-1 sm:px-2 font-medium text-xs sm:text-sm md:text-base hidden sm:inline">Đăng nhập</span>
           </Link>
         ) : (
           <Profile data={loggedInUser} />
         )}
+
+        {/* Cart */}
         <div
-          className="relative flex items-center gap-x-3 cart-home cursor-pointer"
+          className="relative flex items-center gap-0.5 sm:gap-2 cart-home cursor-pointer flex-shrink-0"
           onMouseOver={hanleMouseOver}
           onMouseOut={hanleMouseOut}
         >
@@ -216,7 +221,7 @@ const Navbar = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-8 h-8 text-white cursor-pointer"
+            className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 text-white cursor-pointer"
           >
             <path
               strokeLinecap="round"
@@ -224,10 +229,10 @@ const Navbar = () => {
               d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
             />
           </svg>
-          <div className="flex flex-col items-start justify-between ">
-            <span className="font-medium text-sm">Giỏ hàng của bạn</span>
-            <span className="font-medium text-sm ">
-              ({cart?.length || 0}) sản phẩm
+          <div className="hidden sm:flex flex-col items-start justify-between">
+            <span className="font-medium text-xs md:text-sm whitespace-nowrap">Giỏ hàng</span>
+            <span className="font-medium text-xs md:text-sm whitespace-nowrap">
+              ({cart?.length || 0})
             </span>
           </div>
           {cart?.length > 0 ? <Cart /> : <CartHollow />}

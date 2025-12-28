@@ -20,7 +20,7 @@ const ProductListHome = ({ data, bg = "", className = "", title = "", loading = 
   return (
     <div className={`${className} animate-fade-in-up`}>
       {title && (
-        <div className="container mb-4 sm:mb-6">
+        <div className="container mb-2 sm:mb-3 md:mb-4">
           <div className="flex items-center gap-x-2 sm:gap-x-3">
             <span className="w-2 h-6 sm:h-8 bg-red-600 rounded-full block" />
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800">{title}</h2>
@@ -29,10 +29,10 @@ const ProductListHome = ({ data, bg = "", className = "", title = "", loading = 
       )}
       <div
         className={`container ${
-          bg === "bg1" ? 'bg-[url("../images/bg.png")] h-[460px]' : ""
+          bg === "bg1" ? 'bg-[url("../images/bg.png")]' : ""
         }
-        ${bg === "bg2" ? 'bg-[url("../images/bg2.png")] h-[460px]' : ""}
-           bg-no-repeat w-full bg-cover rounded-lg shadow-lg overflow-hidden`}
+        ${bg === "bg2" ? 'bg-[url("../images/bg2.png")]' : ""}
+           bg-no-repeat bg-cover rounded-lg shadow-lg overflow-hidden min-h-[200px] sm:min-h-[260px] md:min-h-[320px] lg:min-h-[380px] px-3 sm:px-6 py-4 sm:py-6`}
       >
         {loading ? (
           <div className="p-5">
@@ -43,32 +43,32 @@ const ProductListHome = ({ data, bg = "", className = "", title = "", loading = 
             modules={[Navigation, Pagination, EffectCards]}
             slidesPerView={1}
             slidesPerGroup={1}
-            spaceBetween={8}
+            spaceBetween={2}
             breakpoints={{
               480: {
                 slidesPerView: 1.5,
                 slidesPerGroup: 1,
-                spaceBetween: 10,
+                spaceBetween: 3,
               },
               640: {
                 slidesPerView: 2,
                 slidesPerGroup: 2,
-                spaceBetween: 12,
+                spaceBetween: 4,
               },
               768: {
                 slidesPerView: 3,
                 slidesPerGroup: 3,
-                spaceBetween: 12,
+                spaceBetween: 4,
               },
               1024: {
                 slidesPerView: 5,
                 slidesPerGroup: 5,
-                spaceBetween: 12,
+                spaceBetween: 4,
               },
             }}
             navigation
             pagination={{ clickable: true }}
-            className={`w-full rounded-lg ${className}`}
+            className="w-full h-full"
           >
             {data && data.length > 0 &&
               data.map((item) => (

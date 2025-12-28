@@ -44,24 +44,24 @@ const ListAddress = () => {
     <>
       {status === action_status.LOADING && (
         <>
-          <div className="w-full bg-white  border-2 border-dotted px-5 py-5 rounded-lg flex items-center justify-between my-7 focus:border-solid">
-            <div className="flex flex-col justify-between gap-y-3 ">
-              <div className="flex items-center gap-x-5 mb-2">
-                <Skeleton className="w-[100px] h-4 rounded-md" />
-                <Skeleton className="w-[100px] h-4 rounded-md" />
+          <div className="w-full bg-white border-2 border-dotted px-3 sm:px-5 py-3 sm:py-5 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between my-4 sm:my-7 focus:border-solid">
+            <div className="flex flex-col justify-between gap-y-2 sm:gap-y-3 w-full">
+              <div className="flex items-center gap-x-2 sm:gap-x-5 mb-2 flex-wrap">
+                <Skeleton className="w-[70px] sm:w-[100px] h-3 sm:h-4 rounded-md" />
+                <Skeleton className="w-[70px] sm:w-[100px] h-3 sm:h-4 rounded-md" />
               </div>
-              <Skeleton className="w-[600px] h-4 rounded-md" />
-              <Skeleton className="w-[250px] h-4 rounded-md" />
+              <Skeleton className="w-full sm:w-[600px] h-3 sm:h-4 rounded-md" />
+              <Skeleton className="w-4/5 sm:w-[250px] h-3 sm:h-4 rounded-md" />
             </div>
           </div>
-          <div className="w-full bg-white  border-2 border-dotted px-5 py-5 rounded-lg flex items-center justify-between my-7 focus:border-solid">
-            <div className="flex flex-col justify-between gap-y-3 ">
-              <div className="flex items-center gap-x-5 mb-2">
-                <Skeleton className="w-[100px] h-4 rounded-md" />
-                <Skeleton className="w-[100px] h-4 rounded-md" />
+          <div className="w-full bg-white border-2 border-dotted px-3 sm:px-5 py-3 sm:py-5 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between my-4 sm:my-7 focus:border-solid">
+            <div className="flex flex-col justify-between gap-y-2 sm:gap-y-3 w-full">
+              <div className="flex items-center gap-x-2 sm:gap-x-5 mb-2 flex-wrap">
+                <Skeleton className="w-[70px] sm:w-[100px] h-3 sm:h-4 rounded-md" />
+                <Skeleton className="w-[70px] sm:w-[100px] h-3 sm:h-4 rounded-md" />
               </div>
-              <Skeleton className="w-[600px] h-4 rounded-md" />
-              <Skeleton className="w-[250px] h-4 rounded-md" />
+              <Skeleton className="w-full sm:w-[600px] h-3 sm:h-4 rounded-md" />
+              <Skeleton className="w-4/5 sm:w-[250px] h-3 sm:h-4 rounded-md" />
             </div>
           </div>
         </>
@@ -72,14 +72,14 @@ const ListAddress = () => {
           <ItemAddress data={item} key={index} data_key={index} />
         ))}
       {address.length === 0 && (
-        <div className="flex flex-col items-center justify-center h-[300px] bg-white">
+        <div className="flex flex-col items-center justify-center min-h-[200px] sm:min-h-[300px] bg-white rounded-lg p-4 sm:p-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-20 h-20 animate-bounce"
+            className="w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 animate-bounce mb-3"
           >
             <path
               strokeLinecap="round"
@@ -87,9 +87,8 @@ const ListAddress = () => {
               d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <span className="text-lg font-medium">
-            Hiện tại chưa có thông tin địa chỉ. Vui lòng bạn thêm địa chỉ mới
-            !!!
+          <span className="text-sm sm:text-base md:text-lg font-medium text-center px-2">
+            Chưa có địa chỉ. Vui lòng thêm địa chỉ mới
           </span>
         </div>
       )}

@@ -96,8 +96,8 @@ const CheckoutPage = () => {
     return (
       <div className="checkout-page">
         <div className="checkout-container">
-        <div style={{textAlign: "center", padding: "20px sm:padding-30px md:padding-40px"}}>
-          <p className="text-xs sm:text-sm md:text-base">Đang tải dữ liệu đơn hàng...</p>
+          <div className="text-center px-5 sm:px-8 md:px-10 py-5 sm:py-8 md:py-10">
+            <p className="text-xs sm:text-sm md:text-base">Đang tải dữ liệu đơn hàng...</p>
           </div>
         </div>
       </div>
@@ -108,18 +108,11 @@ const CheckoutPage = () => {
     return (
       <div className="checkout-page">
         <div className="checkout-container">
-          <div style={{textAlign: "center", padding: "40px"}}>
-            <p style={{color: "#d32f2f", marginBottom: "20px"}}>❌ Không tìm thấy đơn hàng</p>
+          <div className="text-center px-5 sm:px-8 md:px-10 py-10 sm:py-16 md:py-20">
+            <p className="text-red-600 font-bold text-base sm:text-lg md:text-xl mb-5 sm:mb-6">❌ Không tìm thấy đơn hàng</p>
             <button 
               onClick={() => navigate("/cart")}
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "#1976d2",
-                color: "white",
-                border: "none",
-                borderRadius: "4px",
-                cursor: "pointer"
-              }}
+              className="px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm sm:text-base"
             >
               Quay lại giỏ hàng
             </button>
@@ -134,26 +127,16 @@ const CheckoutPage = () => {
       <div className="checkout-container">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">Thanh toán đơn hàng</h1>
 
-        <div className="checkout-content flex flex-col lg:flex-row gap-4 sm:gap-6">
-          {/* Cancelled Payment Alert */}
-          {paymentCancelled && (
-            <div style={{
-              padding: "12px sm:padding-16px",
-              backgroundColor: "#fff3cd",
-              border: "1px solid #ffc107",
-              borderRadius: "4px",
-              marginBottom: "16px sm:marginBottom-20px",
-              color: "#856404",
-              fontSize: "13px sm:fontSize-14px md:fontSize-15px",
-              lineHeight: "1.5",
-              width: "100%"
-            }}>
-              ⚠️ Bạn đã hủy giao dịch PayOS. Vui lòng chọn phương thức thanh toán khác hoặc thử lại.
-            </div>
-          )}
+        {/* Cancelled Payment Alert */}
+        {paymentCancelled && (
+          <div className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 bg-yellow-50 border-2 border-yellow-400 rounded mb-4 sm:mb-6 text-yellow-800 text-xs sm:text-sm md:text-base leading-relaxed w-full">
+            ⚠️ Bạn đã hủy giao dịch PayOS. Vui lòng chọn phương thức thanh toán khác hoặc thử lại.
+          </div>
+        )}
 
+        <div className="checkout-content">
           {/* Order Summary */}
-          <div className="order-summary w-full lg:w-1/3">
+          <div className="order-summary w-full">
             <h2 className="text-base sm:text-lg md:text-xl font-bold mb-4">Tóm tắt đơn hàng</h2>
             <div className="summary-item">
               <span>Mã đơn hàng:</span>
@@ -178,8 +161,29 @@ const CheckoutPage = () => {
             </div>
           </div>
 
+          {/* Address Section */}
+          <div className="address-section w-full">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold mb-4">Thông tin giao hàng</h2>
+            {orderData?.shippingAddress && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="summary-item">
+                  <span className="font-semibold text-sm">Người nhận:</span>
+                  <span className="text-sm">{orderData.shippingAddress.receiver}</span>
+                </div>
+                <div className="summary-item">
+                  <span className="font-semibold text-sm">Điện thoại:</span>
+                  <span className="text-sm">{orderData.shippingAddress.phone}</span>
+                </div>
+                <div className="summary-item">
+                  <span className="font-semibold text-sm">Địa chỉ:</span>
+                  <span className="text-sm">{orderData.shippingAddress.address}</span>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Payment Method Selection */}
-          <div className="payment-section w-full lg:w-2/3">
+          <div className="payment-section w-full">
             <PaymentMethod
               selectedMethod={selectedPayment}
               onMethodChange={setSelectedPayment}

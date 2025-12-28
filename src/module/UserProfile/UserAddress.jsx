@@ -155,21 +155,21 @@ const UserAddress = () => {
     <div>
       <DashboardHeading
         title="Sổ địa chỉ"
-        className="px-5 py-5"
+        className="px-2 sm:px-4 py-2 sm:py-4"
       ></DashboardHeading>
 
       <button
-        className="w-full bg-white h-[80px] rounded-md border-2 border-dotted focus:border-solid"
+        className="w-full bg-white min-h-[60px] sm:min-h-[80px] rounded-md border-2 border-dotted focus:border-solid transition-colors hover:border-solid"
         onClick={() => setShowModal(true)}
       >
-        <div className="flex items-center justify-center gap-5">
+        <div className="flex items-center justify-center gap-2 sm:gap-5 px-3 sm:px-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-5 h-5"
+            className="w-4 sm:w-5 h-4 sm:h-5"
           >
             <path
               strokeLinecap="round"
@@ -177,7 +177,7 @@ const UserAddress = () => {
               d="M12 4.5v15m7.5-7.5h-15"
             />
           </svg>
-          <span className="text-base font-medium">Thêm địa chỉ mới </span>
+          <span className="text-xs sm:text-sm md:text-base font-medium">Thêm địa chỉ mới</span>
         </div>
       </button>
 
@@ -186,48 +186,48 @@ const UserAddress = () => {
         onClose={() => {
           setShowModal(false);
         }}
-        bodyClassName="w-[750px] bg-white  rounded-lg relative z-10 content h-[650px]  overflow-x-hidden"
+        bodyClassName="w-11/12 sm:w-3/4 md:w-2/3 lg:w-[750px] bg-white rounded-lg relative z-10 content max-h-[90vh]"
       >
-        <div className="overflow-y-auto h-[650px] px-10 py-5 ">
-          <h3 className="text-lg font-semibold text-black text-left mb-3">
+        <div className="overflow-y-auto max-h-[85vh] px-4 sm:px-8 md:px-10 py-3 sm:py-5">
+          <h3 className="text-base sm:text-lg font-semibold text-black text-left mb-3">
             Thông tin người nhận hàng
           </h3>
           <form onSubmit={handleSubmit(handleSend)} autoComplete="off">
-            <div className="flex flex-col items-start gap-4 mb-5">
+            <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5">
               <Label htmlFor="fullname">* Họ tên</Label>
               <Input
                 type="text"
                 name="fullname"
-                placeholder="Mời bạn nhập tên của bạn"
+                placeholder="Nhập tên của bạn"
                 control={control}
               ></Input>
               {errors.fullname && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.fullname?.message}
                 </p>
               )}
             </div>
 
-            <div className="flex flex-col items-start gap-4 mb-5">
+            <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5">
               <Label htmlFor="sdt">* Số điện thoại</Label>
               <Input
                 type="number"
                 name="sdt"
-                placeholder="Mời bạn nhập số điện thoại"
+                placeholder="Nhập số điện thoại"
                 control={control}
               ></Input>
               {errors.sdt && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.sdt?.message}
                 </p>
               )}
             </div>
 
-            <h3 className="text-lg font-semibold text-black text-left mb-3">
+            <h3 className="text-base sm:text-lg font-semibold text-black text-left mb-2 sm:mb-3">
               Địa chỉ nhận hàng
             </h3>
 
-            <div className="flex flex-col items-start gap-4 mb-5">
+            <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5">
               <Label htmlFor="country">* Quốc gia</Label>
               <DropdownSelect
                 control={control}
@@ -238,14 +238,14 @@ const UserAddress = () => {
                 searchable={true}
               ></DropdownSelect>
               {errors.country && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.country?.message}
                 </p>
               )}
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex flex-col items-start gap-4 mb-5">
+            <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-4">
+              <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5 flex-1">
                 <Label htmlFor="province">* Tỉnh/Thành phố</Label>
                 <Input
                   type="text"
@@ -254,13 +254,13 @@ const UserAddress = () => {
                   control={control}
                 ></Input>
                 {errors.province && (
-                  <p className="text-red-500 text-base font-medium">
+                  <p className="text-red-500 text-xs sm:text-sm font-medium">
                     {errors.province?.message}
                   </p>
                 )}
               </div>
 
-              <div className="flex flex-col items-start gap-4 mb-5">
+              <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5 flex-1">
                 <Label htmlFor="ward">* Phường/Xã</Label>
                 <Input
                   type="text"
@@ -269,53 +269,50 @@ const UserAddress = () => {
                   control={control}
                 ></Input>
                 {errors.ward && (
-                  <p className="text-red-500 text-base font-medium">
+                  <p className="text-red-500 text-xs sm:text-sm font-medium">
                     {errors.ward?.message}
                   </p>
                 )}
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex flex-col items-start gap-4 mb-5">
-                <Label htmlFor="address">* Địa chỉ cụ thể</Label>
-                <Input
-                  type="text"
-                  name="address"
-                  placeholder="Số nhà, ngõ, tên đường"
-                  style={{ width: "300px" }}
-                  control={control}
-                ></Input>
-                {errors.address && (
-                  <p className="text-red-500 text-base font-medium">
-                    {errors.address?.message}
-                  </p>
-                )}
-              </div>
+            <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5">
+              <Label htmlFor="address">* Địa chỉ cụ thể</Label>
+              <Input
+                type="text"
+                name="address"
+                placeholder="Số nhà, ngõ, tên đường"
+                control={control}
+              ></Input>
+              {errors.address && (
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
+                  {errors.address?.message}
+                </p>
+              )}
             </div>
 
-            <div className="flex items-center gap-2 mb-5">
+            <div className="flex items-center gap-2 mb-4 sm:mb-5">
               <Checkbox
                 control={control}
                 name="setDefault"
                 text="Đặt thành địa chỉ mặc định"
               />
             </div>
-            <div className="flex items-center justify-end gap-x-4 mt-5">
+            <div className="flex items-center justify-end gap-x-2 sm:gap-x-4 mt-4 sm:mt-5">
               <button
-                className="p-3 text-base font-medium bg-white text-[#316BFF] rounded-lg border border-solid border-[blue]"
+                className="p-2 sm:p-3 text-xs sm:text-sm md:text-base font-medium bg-white text-[#316BFF] rounded-lg border border-solid border-blue-400"
                 type="button"
                 onClick={() => setShowModal(false)}
               >
-                Hủy bỏ
+                Hủy
               </button>
               <Button
-                height="50px"
+                height="40px sm:h-[50px]"
                 type="submit"
                 isLoading={isSubmitting}
                 disabled={isSubmitting}
               >
-                Lưu địa chỉ
+                <span className="text-xs sm:text-sm md:text-base font-medium">Lưu</span>
               </Button>
             </div>
           </form>

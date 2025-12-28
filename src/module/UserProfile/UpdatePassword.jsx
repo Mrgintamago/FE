@@ -81,9 +81,9 @@ const UpdatePassword = () => {
     <div className="bg-white rounded-lg">
       <DashboardHeading
         title="Đổi mật khẩu"
-        className="px-5 py-5"
+        className="px-2 sm:px-4 py-2 sm:py-4"
       ></DashboardHeading>
-      <form className="pb-16" onSubmit={handleSubmit(handleReset)}>
+      <form className="pb-16 px-3 sm:px-6 max-w-full" onSubmit={handleSubmit(handleReset)}>
         <Field>
           <Label htmlFor="passwordCurrent">Mật khẩu hiện tại</Label>
           <InputPasswordToggle
@@ -91,7 +91,7 @@ const UpdatePassword = () => {
             name="passwordCurrent"
           ></InputPasswordToggle>
           {errors.passwordCurrent && (
-            <p className="text-red-500 text-base font-medium">
+            <p className="text-red-500 text-xs sm:text-sm md:text-base font-medium">
               {errors.passwordCurrent?.message}
             </p>
           )}
@@ -104,7 +104,7 @@ const UpdatePassword = () => {
             name="password"
           ></InputPasswordToggle>
           {errors.password && (
-            <p className="text-red-500 text-base font-medium">
+            <p className="text-red-500 text-xs sm:text-sm md:text-base font-medium">
               {errors.password?.message}
             </p>
           )}
@@ -117,7 +117,7 @@ const UpdatePassword = () => {
             name="passwordConfirm"
           ></InputPasswordToggle>
           {errors.passwordConfirm && (
-            <p className="text-red-500 text-base font-medium">
+            <p className="text-red-500 text-xs sm:text-sm md:text-base font-medium">
               {errors.passwordConfirm?.message}
             </p>
           )}
@@ -125,13 +125,13 @@ const UpdatePassword = () => {
 
         <Button
           kind="primary"
-          className="mx-auto w-[200px] mt-10"
+          className="w-full sm:w-auto"
           type="submit"
           disabled={isSubmitting}
           isLoading={isSubmitting}
-          height="50px"
+          height="40px"
         >
-          <span className="text-base font-medium"> Đổi mật khẩu</span>
+          <span className="text-xs sm:text-sm md:text-base font-medium">Đổi mật khẩu</span>
         </Button>
       </form>
     </div>

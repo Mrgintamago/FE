@@ -117,14 +117,14 @@ const SubInformationProduct = ({ data }) => {
   };
 
   return (
-    <div className="product-info flex flex-col p-4 sm:p-6">
+    <div className="product-info flex flex-col p-3 sm:p-4 md:p-6">
       {/* Title */}
-      <h1 className="text-xl sm:text-2xl font-bold text-blue-600 mb-3 line-clamp-2">
+      <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600 mb-2 sm:mb-3 line-clamp-2">
         {data?.title}
       </h1>
 
       {/* Status and Brand */}
-      <div className="flex items-center gap-x-2 sm:gap-x-3 mb-4 flex-wrap text-xs sm:text-sm">
+      <div className="flex items-center gap-x-1 sm:gap-x-2 md:gap-x-3 mb-3 sm:mb-4 flex-wrap text-xs sm:text-xs md:text-sm">
         <span className={`font-medium ${data?.inventory > 0 ? "text-red-600" : "text-orange-500"}`}>
           Tình trạng: {data?.inventory > 0 ? "Còn hàng" : "Hết hàng"}
         </span>
@@ -139,18 +139,18 @@ const SubInformationProduct = ({ data }) => {
       </div>
 
       {/* Price */}
-      <div className="mb-4 sm:mb-6">
-        <span className="text-xs sm:text-sm text-gray-600 mb-2 block">Giá:</span>
-        <div className="flex items-center gap-x-3 sm:gap-x-4 flex-wrap">
-          <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-600 break-words">
+      <div className="mb-3 sm:mb-4 md:mb-6">
+        <span className="text-xs sm:text-sm text-gray-600 mb-1.5 block">Giá:</span>
+        <div className="flex items-center gap-x-2 sm:gap-x-3 md:gap-x-4 flex-wrap">
+          <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-red-600 break-words">
             {formatPrice(data?.promotion || data?.price)}
           </span>
           {data?.promotion && data?.promotion < data?.price && (
             <>
-              <span className="text-base sm:text-lg line-through text-slate-400">
+              <span className="text-sm sm:text-base md:text-lg line-through text-slate-400">
                 {formatPrice(data?.price)}
               </span>
-              <span className="text-sm sm:text-base font-semibold text-white bg-red-500 px-2.5 py-1 rounded-md">
+              <span className="text-xs sm:text-sm md:text-base font-semibold text-white bg-red-500 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md">
                 -{data?.percent || Math.round(((data.price - data.promotion) * 100) / data.price)}%
               </span>
             </>
@@ -160,9 +160,9 @@ const SubInformationProduct = ({ data }) => {
 
       {/* Options */}
       {displayOptions.length > 0 && (
-        <div className="mb-4 sm:mb-6">
-          <span className="text-xs sm:text-sm text-gray-600 mb-2 block">Phân loại: <span className="text-red-500">*</span></span>
-          <div className="flex flex-wrap gap-2 sm:gap-3">
+        <div className="mb-3 sm:mb-4 md:mb-6">
+          <span className="text-xs sm:text-sm text-gray-600 mb-1.5 block">Phân loại: <span className="text-red-500">*</span></span>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3">
             {displayOptions.map((option, index) => {
               // optionKey chính là tên option
               const optionKey = option;
@@ -170,7 +170,7 @@ const SubInformationProduct = ({ data }) => {
                 <button
                   key={index}
                   type="button"
-                  className={`px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm rounded-md border-2 transition-all ${
+                  className={`px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 text-xs sm:text-xs md:text-sm rounded-md border-2 transition-all whitespace-nowrap ${
                     selectedOption === optionKey
                       ? "bg-gray-200 border-gray-400 font-semibold text-blue-600"
                       : "bg-white border-gray-300 hover:border-gray-400 text-blue-600"
@@ -189,18 +189,18 @@ const SubInformationProduct = ({ data }) => {
       )}
 
       {/* Quantity */}
-      <div className="mb-4 sm:mb-6">
-        <span className="text-xs sm:text-sm text-gray-600 mb-2 block">Số lượng:</span>
+      <div className="mb-3 sm:mb-4 md:mb-6">
+        <span className="text-xs sm:text-sm text-gray-600 mb-1.5 block">Số lượng:</span>
         <div className="flex items-center gap-x-2 sm:gap-x-3">
           <button
-            className="w-8 sm:w-10 h-8 sm:h-10 flex items-center justify-center border-2 border-gray-300 rounded-md hover:bg-gray-100 transition-colors text-sm sm:text-lg"
+            className="w-7 sm:w-9 md:w-10 h-7 sm:h-9 md:h-10 flex items-center justify-center border-2 border-gray-300 rounded-md hover:bg-gray-100 transition-colors text-xs sm:text-sm md:text-lg"
             onClick={() => handleQuantityChange(-1)}
           >
             <span>-</span>
           </button>
-          <span className="font-semibold w-10 sm:w-12 text-center text-sm sm:text-lg">{quantity}</span>
+          <span className="font-semibold w-8 sm:w-10 md:w-12 text-center text-xs sm:text-sm md:text-lg">{quantity}</span>
           <button
-            className="w-8 sm:w-10 h-8 sm:h-10 flex items-center justify-center border-2 border-gray-300 rounded-md hover:bg-gray-100 transition-colors text-sm sm:text-lg"
+            className="w-7 sm:w-9 md:w-10 h-7 sm:h-9 md:h-10 flex items-center justify-center border-2 border-gray-300 rounded-md hover:bg-gray-100 transition-colors text-xs sm:text-sm md:text-lg"
             onClick={() => handleQuantityChange(1)}
           >
             <span>+</span>
@@ -210,10 +210,10 @@ const SubInformationProduct = ({ data }) => {
 
       {/* Action Buttons */}
       {data?.inventory > 0 && (
-        <div className="mb-4 sm:mb-6">
-          <div className="flex gap-x-2 sm:gap-x-3">
+        <div className="mb-3 sm:mb-4 md:mb-6">
+          <div className="flex gap-x-2 sm:gap-x-2 md:gap-x-3">
             <button
-              className={`flex-1 px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold rounded-md transition-colors ${
+              className={`flex-1 px-2 sm:px-3 md:px-4 py-2 sm:py-2 md:py-3 text-xs sm:text-xs md:text-sm font-semibold rounded-md transition-colors ${
                 isOptionSelected
                   ? "bg-blue-500 hover:bg-blue-600 cursor-pointer text-white"
                   : "bg-gray-400 cursor-not-allowed text-white"
@@ -225,7 +225,7 @@ const SubInformationProduct = ({ data }) => {
               THÊM VÀO GIỎ
             </button>
             <button
-              className={`flex-1 px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold rounded-md transition-colors ${
+              className={`flex-1 px-2 sm:px-3 md:px-4 py-2 sm:py-2 md:py-3 text-xs sm:text-xs md:text-sm font-semibold rounded-md transition-colors ${
                 isOptionSelected
                   ? "bg-blue-700 hover:bg-blue-800 cursor-pointer text-white"
                   : "bg-gray-400 cursor-not-allowed text-white"
@@ -241,9 +241,9 @@ const SubInformationProduct = ({ data }) => {
       )}
 
       {/* Product Information */}
-      <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+      <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
         {isPreOrder && (
-          <div className="flex items-center gap-x-2 mb-4">
+          <div className="flex items-center gap-x-2 mb-3 sm:mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -261,7 +261,7 @@ const SubInformationProduct = ({ data }) => {
             <span className="font-semibold text-gray-800">Flash PRE - ORDER</span>
           </div>
         )}
-        <div className="space-y-2 text-sm">
+        <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
           <p className="font-semibold text-gray-800">{data?.title}</p>
           
           {/* Nhà cung cấp - Thương hiệu */}
@@ -323,9 +323,9 @@ const SubInformationProduct = ({ data }) => {
       </div>
 
       {/* Share and Stats Section */}
-      <div className="mb-6 flex items-center justify-between border-t border-gray-200 pt-4">
-        <div className="flex items-center gap-x-4">
-          <span className="text-sm font-medium text-gray-700">Chia sẻ:</span>
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 border-t border-gray-200 pt-3 sm:pt-4">
+        <div className="flex items-center gap-x-3 sm:gap-x-4">
+          <span className="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">Chia sẻ:</span>
           <div className="flex gap-x-2">
             <button
               onClick={() => handleShare("facebook")}
@@ -345,9 +345,9 @@ const SubInformationProduct = ({ data }) => {
             </button>
           </div>
         </div>
-        <div className="flex items-center gap-x-6 text-sm text-gray-700">
-          <span>Đã bán: {data?.sold || 0}</span>
-          <span>Lượt xem: {data?.views || 0}</span>
+        <div className="flex items-center gap-x-4 sm:gap-x-6 text-xs sm:text-sm text-gray-700">
+          <span className="whitespace-nowrap">Đã bán: {data?.sold || 0}</span>
+          <span className="whitespace-nowrap">Lượt xem: {data?.views || 0}</span>
         </div>
       </div>
 

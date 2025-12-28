@@ -173,47 +173,47 @@ const ItemAddress = ({ data, data_key, onClose }) => {
     <>
       {/* Chỉ hiển thị address item nếu không phải modal chỉnh sửa từ payment page */}
       {!onClose && (
-      <div className="w-full bg-white  border-2 border-dotted text-black px-5 py-5 rounded-lg flex items-center justify-between my-7 focus:border-solid">
-        <div className="flex flex-col justify-between ">
-          <div className="flex items-center gap-x-5 mb-2">
-            <h3 className="font-medium text-base ">{data.name}</h3>
+      <div className="w-full bg-white border-2 border-dotted text-black px-3 sm:px-5 py-3 sm:py-5 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between my-3 sm:my-7 gap-3 sm:gap-0 focus:border-solid">
+        <div className="flex flex-col justify-between w-full sm:w-auto">
+          <div className="flex items-center gap-x-2 sm:gap-x-5 mb-2 flex-wrap">
+            <h3 className="font-medium text-xs sm:text-sm md:text-base">{data.name}</h3>
             {data.setDefault && (
-              <div className="px-1 py-1 bg-blue-100 rounded-md font-medium text-sm">
+              <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 bg-blue-100 rounded-md font-medium text-xs">
                 Mặc định
               </div>
             )}
           </div>
 
-          <div className="flex flex-col">
-            <span className="text-sm font-normal">
+          <div className="flex flex-col gap-1">
+            <span className="text-xs sm:text-sm font-normal break-words">
               Địa chỉ: {data.detail} , {data.ward}, {data.province}{data.country ? `, ${data.country}` : ""}
             </span>
-            <span className="text-sm font-normal">
+            <span className="text-xs sm:text-sm font-normal">
               Điện thoại: {data.phone}
             </span>
           </div>
         </div>
 
-        <div className="flex items-center justify-start gap-x-4">
+        <div className="flex items-center justify-start gap-x-2 w-full sm:w-auto flex-wrap">
           {!data.setDefault && (
             <button
-              className="border-2 border-solid px-2 py-2 text-green-400 font-medium border-green-400 rounded-lg"
+              className="border-2 border-solid px-1.5 sm:px-2 py-1 sm:py-2 text-xs sm:text-sm text-green-400 font-medium border-green-400 rounded-lg whitespace-nowrap"
               type="button"
               onClick={() => handleDefault(data_key)}
             >
-              Đặt làm mặc định
+              Mặc định
             </button>
           )}
 
           <button
-            className="border-2 border-solid px-2 py-2 text-blue-400 font-medium border-blue-400 rounded-lg"
+            className="border-2 border-solid px-1.5 sm:px-2 py-1 sm:py-2 text-xs sm:text-sm text-blue-400 font-medium border-blue-400 rounded-lg whitespace-nowrap"
             type="button"
             onClick={() => setShowModal(true)}
           >
-            Chỉnh sửa
+            Sửa
           </button>
           <button
-            className="border-2 border-solid px-2 py-2 text-red-600 font-medium border-[red] rounded-lg"
+            className="border-2 border-solid px-1.5 sm:px-2 py-1 sm:py-2 text-xs sm:text-sm text-red-600 font-medium border-red-600 rounded-lg whitespace-nowrap"
             type="button"
             onClick={handleDelete}
           >
@@ -228,14 +228,14 @@ const ItemAddress = ({ data, data_key, onClose }) => {
         onClose={() => {
           setShowModal(false);
         }}
-        bodyClassName="w-[750px] bg-white  rounded-lg relative z-10 content  overflow-y-auto "
+        bodyClassName="w-11/12 sm:w-3/4 md:w-2/3 lg:w-[750px] bg-white rounded-lg relative z-10 content overflow-y-auto max-h-[90vh]"
       >
-        <div className="h-[650px] overflow-x-hidden px-10 py-5 ">
-          <h3 className="text-lg font-semibold text-black text-left mb-3">
+        <div className="max-h-[85vh] overflow-x-hidden px-4 sm:px-8 md:px-10 py-3 sm:py-5">
+          <h3 className="text-base sm:text-lg font-semibold text-black text-left mb-3">
             Thông tin người nhận hàng
           </h3>
           <form autoComplete="off" onSubmit={handleSubmit(handleEdit)}>
-            <div className="flex flex-col items-start gap-4 mb-5">
+            <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5">
               <Label htmlFor="fullname">* Họ tên</Label>
               <Input
                 type="text"
@@ -250,26 +250,26 @@ const ItemAddress = ({ data, data_key, onClose }) => {
               )}
             </div>
 
-            <div className="flex flex-col items-start gap-4 mb-5">
+            <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5">
               <Label htmlFor="sdt">* Số điện thoại</Label>
               <Input
                 type="number"
                 name="sdt"
-                placeholder="Mời bạn nhập số điện thoại"
+                placeholder="Nhập số điện thoại"
                 control={control}
               ></Input>
               {errors.sdt && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.sdt?.message}
                 </p>
               )}
             </div>
 
-            <h3 className="text-lg font-semibold text-black text-left mb-3">
+            <h3 className="text-base sm:text-lg font-semibold text-black text-left mb-2 sm:mb-3">
               Địa chỉ nhận hàng
             </h3>
 
-            <div className="flex flex-col items-start gap-4 mb-5">
+            <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5">
               <Label htmlFor="country">* Quốc gia</Label>
               <DropdownSelect
                 control={control}
@@ -280,14 +280,14 @@ const ItemAddress = ({ data, data_key, onClose }) => {
                 searchable={true}
               ></DropdownSelect>
               {errors.country && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.country?.message}
                 </p>
               )}
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex flex-col items-start gap-4 mb-5">
+            <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-4">
+              <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5 flex-1">
                 <Label htmlFor="province">* Tỉnh/Thành phố</Label>
                 <Input
                   type="text"
@@ -296,13 +296,13 @@ const ItemAddress = ({ data, data_key, onClose }) => {
                   control={control}
                 ></Input>
                 {errors.province && (
-                  <p className="text-red-500 text-base font-medium">
+                  <p className="text-red-500 text-xs sm:text-sm font-medium">
                     {errors.province?.message}
                   </p>
                 )}
               </div>
 
-              <div className="flex flex-col items-start gap-4 mb-5">
+              <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5 flex-1">
                 <Label htmlFor="ward">* Phường/Xã</Label>
                 <Input
                   type="text"
@@ -311,56 +311,53 @@ const ItemAddress = ({ data, data_key, onClose }) => {
                   control={control}
                 ></Input>
                 {errors.ward && (
-                  <p className="text-red-500 text-base font-medium">
+                  <p className="text-red-500 text-xs sm:text-sm font-medium">
                     {errors.ward?.message}
                   </p>
                 )}
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex flex-col items-start gap-4 mb-5">
-                <Label htmlFor="address">* Địa chỉ cụ thể</Label>
-                <Input
-                  type="text"
-                  name="address"
-                  placeholder="Số nhà, ngõ, tên đường"
-                  style={{ width: "300px" }}
-                  control={control}
-                ></Input>
-                {errors.address && (
-                  <p className="text-red-500 text-base font-medium">
-                    {errors.address?.message}
-                  </p>
-                )}
-              </div>
+            <div className="flex flex-col items-start gap-2 sm:gap-4 mb-4 sm:mb-5">
+              <Label htmlFor="address">* Địa chỉ cụ thể</Label>
+              <Input
+                type="text"
+                name="address"
+                placeholder="Số nhà, ngõ, tên đường"
+                control={control}
+              ></Input>
+              {errors.address && (
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
+                  {errors.address?.message}
+                </p>
+              )}
             </div>
 
-            <div className="flex items-center gap-2 mb-5">
+            <div className="flex items-center gap-2 mb-4 sm:mb-5">
               <Checkbox
                 control={control}
                 name="setDefault"
                 text="Đặt thành địa chỉ mặc định"
               />
             </div>
-            <div className="flex items-center justify-end gap-x-4 mt-5">
+            <div className="flex items-center justify-end gap-x-2 sm:gap-x-4 mt-4 sm:mt-5">
               <button
-                className="p-3 text-base font-medium bg-white text-[#316BFF] rounded-lg border border-solid border-[blue]"
+                className="p-2 sm:p-3 text-xs sm:text-sm md:text-base font-medium bg-white text-[#316BFF] rounded-lg border border-solid border-blue-400"
                 type="button"
                 onClick={() => {
                   setShowModal(false);
                   if (onClose) onClose();
                 }}
               >
-                Hủy bỏ
+                Hủy
               </button>
               <Button
                 type="submit"
-                height="50px"
+                height="40px sm:h-[50px]"
                 isLoading={isSubmitting}
                 disabled={isSubmitting}
               >
-                <span className="text-base font-medium">Lưu địa chỉ</span>
+                <span className="text-xs sm:text-sm md:text-base font-medium">Lưu</span>
               </Button>
             </div>
           </form>

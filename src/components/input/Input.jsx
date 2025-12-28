@@ -15,12 +15,12 @@ const Input = ({ name = "", type = "text", children, control, ...props }) => {
         id={name}
         {...props}
         {...field}
-        className={`w-full border-[1px] border-solid border-[#292D32] rounded-[8px] transition-all text-[#171725] font-medium text-base ${
-          children ? "py-[14px] pr-[40px] pl-[20px]" : " px-[20px] py-[14px]"
+        className={`w-full border-[1px] border-solid border-[#292D32] rounded-[6px] sm:rounded-[8px] transition-all text-[#171725] font-medium text-xs sm:text-sm md:text-base ${
+          children ? "py-2 sm:py-3 md:py-3.5 pr-8 sm:pr-10 md:pr-10 pl-3 sm:pl-4 md:pl-5" : "px-3 sm:px-4 md:px-5 py-2 sm:py-3 md:py-3.5"
         }`}
       />
       {children ? (
-        <div className="absolute right-[20px] top-[50%] -translate-y-[50%] cursor-pointer">
+        <div className="absolute right-2 sm:right-3 md:right-4 top-[50%] -translate-y-[50%] cursor-pointer text-gray-500">
           {children}
         </div>
       ) : (

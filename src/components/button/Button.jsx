@@ -11,10 +11,28 @@ const ButtonStyles = styled.button`
   border-radius: 8px;
   font-weight: 600;
   font-size: 18px;
-  height: ${(props) => props.height || "66px"};
+  height: ${(props) => props.height || "50px"};
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 640px) {
+    font-size: 14px;
+    padding: 0 16px;
+    height: 36px;
+  }
+
+  @media (min-width: 641px) and (max-width: 768px) {
+    font-size: 15px;
+    padding: 0 18px;
+    height: 40px;
+  }
+
+  @media (min-width: 769px) {
+    font-size: 18px;
+    padding: 0 25px;
+    height: ${(props) => props.height || "50px"};
+  }
 
   ${(props) =>
     props.bg === "secondary" &&

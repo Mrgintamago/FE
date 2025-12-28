@@ -2,15 +2,17 @@ import React from "react";
 import styled from "styled-components";
 
 const ProgressBarStyles = styled.div`
-  width: 500px;
+  width: 100%;
+  min-width: 100px;
   height: 15px;
   background-color: #e7e7e7;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
+  flex: 1;
   &::after {
     content: "";
-    width: ${(props) => props.value}px;
+    width: ${(props) => props.value}%;
     height: 100%;
     background-color: red;
     top: 0;

@@ -196,59 +196,59 @@ const UserAccount = () => {
       <div className="bg-white rounded-lg">
         <DashboardHeading
           title="Thông tin tài khoản"
-          className="px-5 py-5"
+          className="px-2 sm:px-4 py-2 sm:py-4"
         ></DashboardHeading>
         {status === action_status.LOADING && (!user || Object.keys(user).length === 0) && (!current || Object.keys(current).length === 0) && (
-          <div className="pb-16">
+          <div className="pb-16 px-3 sm:px-6">
             <Field>
-              <Skeleton className="w-[100px] h-4 rounded-lg" />
-              <Skeleton className="w-36 h-36 rounded-full mx-auto" />
+              <Skeleton className="w-20 sm:w-[100px] h-3 sm:h-4 rounded-lg" />
+              <Skeleton className="w-24 sm:w-36 h-24 sm:h-36 rounded-full mx-auto" />
             </Field>
             <Field>
-              <Skeleton className="w-[100px] h-4 rounded-lg" />
-              <Skeleton className="w-full h-4 rounded-md" />
+              <Skeleton className="w-20 sm:w-[100px] h-3 sm:h-4 rounded-lg" />
+              <Skeleton className="w-full h-3 sm:h-4 rounded-md" />
             </Field>
             <Field>
-              <Skeleton className="w-[100px] h-4 rounded-lg" />
-              <Skeleton className="w-full h-4 rounded-md" />
+              <Skeleton className="w-20 sm:w-[100px] h-3 sm:h-4 rounded-lg" />
+              <Skeleton className="w-full h-3 sm:h-4 rounded-md" />
             </Field>
             <Field>
-              <Skeleton className="w-[100px] h-4 rounded-lg" />
-              <Skeleton className="w-full h-4 rounded-md" />
+              <Skeleton className="w-20 sm:w-[100px] h-3 sm:h-4 rounded-lg" />
+              <Skeleton className="w-full h-3 sm:h-4 rounded-md" />
             </Field>
             <Field>
-              <Skeleton className="w-[100px] h-4 rounded-lg" />
-              <Skeleton className="w-full h-4 rounded-md" />
+              <Skeleton className="w-20 sm:w-[100px] h-3 sm:h-4 rounded-lg" />
+              <Skeleton className="w-full h-3 sm:h-4 rounded-md" />
             </Field>
             <Field>
-              <Skeleton className="w-[100px] h-4 rounded-lg" />
-              <div className="flex items-center gap-x-5">
-                <Skeleton className="w-6 h-6 rounded-full" />
-                <Skeleton className="w-6 h-6 rounded-full" />
-                <Skeleton className="w-6 h-6 rounded-full" />
+              <Skeleton className="w-20 sm:w-[100px] h-3 sm:h-4 rounded-lg" />
+              <div className="flex items-center gap-x-3 sm:gap-x-5">
+                <Skeleton className="w-5 sm:w-6 h-5 sm:h-6 rounded-full" />
+                <Skeleton className="w-5 sm:w-6 h-5 sm:h-6 rounded-full" />
+                <Skeleton className="w-5 sm:w-6 h-5 sm:h-6 rounded-full" />
               </div>
             </Field>
-            <Skeleton className="w-[200px] h-[40px] rounded-lg mx-auto mt-10" />
+            <Skeleton className="w-[120px] sm:w-[160px] md:w-[200px] h-[32px] sm:h-[36px] md:h-[40px] rounded-lg mx-auto mt-6 sm:mt-10" />
           </div>
         )}
         {((user && Object.keys(user).length > 0) || (current && Object.keys(current).length > 0) || status === action_status.SUCCEEDED) && (
-          <form className="pb-16" onSubmit={handleSubmit(handleUpdate)}>
+          <form className="pb-16 px-3 sm:px-6" onSubmit={handleSubmit(handleUpdate)}>
             <Field>
-              <Label>Image</Label>
-              <div className="relative mx-auto w-[200px]">
+              <Label>Ảnh đại diện</Label>
+              <div className="relative w-24 sm:w-32 md:w-40">
               <ImageUpload
                 onChange={handleSelectImage}
                 className="mx-auto"
                 progress={progress}
                 image={image}
                 handleDeleteImage={handleDeleteImage}
-                  disabled={isUploading}
+                disabled={isUploading}
               ></ImageUpload>
                 {isUploading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 rounded-full z-20">
                     <div className="flex flex-col items-center gap-2">
-                      <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                      <span className="text-sm font-medium text-gray-700">
+                      <div className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 border-3 sm:border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                      <span className="text-xs sm:text-sm font-medium text-gray-700">
                         {progress > 0 ? `${progress}%` : "Đang tải..."}
                       </span>
                     </div>
@@ -261,14 +261,14 @@ const UserAccount = () => {
               <Label htmlFor="fullname">Họ tên</Label>
               <Input name="fullname" control={control} type="text"></Input>
               {errors.fullname && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.fullname?.message}
                 </p>
               )}
             </Field>
 
             <Field>
-              <Label htmlFor="fullname">Email</Label>
+              <Label htmlFor="email">Email</Label>
               <Input name="email" control={control} disabled></Input>
             </Field>
 
@@ -276,7 +276,7 @@ const UserAccount = () => {
               <Label htmlFor="sdt">Số điện thoại</Label>
               <Input name="sdt" type="number" control={control}></Input>
               {errors.sdt && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.sdt?.message}
                 </p>
               )}
@@ -286,7 +286,7 @@ const UserAccount = () => {
               <Label htmlFor="dateOfBirth">Ngày sinh</Label>
               <Input name="dateOfBirth" type="date" control={control}></Input>
               {errors.dateOfBirth && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.dateOfBirth?.message}
                 </p>
               )}
@@ -324,7 +324,7 @@ const UserAccount = () => {
                 </Radio>
               </FieldCheckboxes>
               {errors.gender && (
-                <p className="text-red-500 text-base font-medium">
+                <p className="text-red-500 text-xs sm:text-sm font-medium">
                   {errors.gender?.message}
                 </p>
               )}
@@ -332,13 +332,13 @@ const UserAccount = () => {
 
             <Button
               kind="primary"
-              className="mx-auto w-[200px] mt-10"
+              className="w-full sm:w-auto"
               type="submit"
               disabled={isSubmitting}
               isLoading={isSubmitting}
-              height="50px"
+              height="40px"
             >
-              Cập nhật thông tin
+              <span className="text-xs sm:text-sm md:text-base font-medium">Cập nhật</span>
             </Button>
           </form>
         )}

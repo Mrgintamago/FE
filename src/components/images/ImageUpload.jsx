@@ -12,7 +12,7 @@ const ImageUpload = (props) => {
   } = props;
   return (
     <label
-      className={`flex items-center justify-center border border-dashed w-[200px] h-[200px] rounded-full ${className} relative overflow-hidden group ${
+      className={`flex items-center justify-center border border-dashed w-20 sm:w-28 md:w-32 h-20 sm:h-28 md:h-32 rounded-full ${className} relative overflow-hidden group ${
         disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
       }`}
     >
@@ -32,9 +32,9 @@ const ImageUpload = (props) => {
           <img
             src="/images/img-upload.png"
             alt="upload-img"
-            className="max-w-[80px] mb-5"
+            className="max-w-12 sm:max-w-14 md:max-w-16 mb-2 sm:mb-3"
           />
-          <p className="font-semibold">Choose photo</p>
+          <p className="font-semibold text-xs sm:text-sm">Choose photo</p>
         </div>
       )}
       {image && (
@@ -42,12 +42,12 @@ const ImageUpload = (props) => {
           <img src={image} className="w-full h-full object-cover" alt="" />
           <button
             type="button"
-            className="w-16 h-16 bg-white rounded-full flex items-center justify-center cursor-pointer absolute z-10 text-red-500 opacity-0 invisible transition-all group-hover:opacity-100 group-hover:visible"
+            className="w-10 sm:w-12 md:w-14 h-10 sm:h-12 md:h-14 bg-white rounded-full flex items-center justify-center cursor-pointer absolute z-10 text-red-500 opacity-0 invisible transition-all group-hover:opacity-100 group-hover:visible"
             onClick={handleDeleteImage}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-4 sm:h-5 md:h-6 w-4 sm:w-5 md:w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

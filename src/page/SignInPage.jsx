@@ -98,7 +98,14 @@ const SignInPage = () => {
       navigate("/");
     } catch (error) {
       toast.dismiss();
-      toast.error(error.message, { pauseOnHover: false });
+      // Handle specific login error codes
+      if (error.code === "INVALID_PASSWORD") {
+        toast.error(error.message, { pauseOnHover: false, autoClose: 4000 });
+      } else if (error.code === "ACCOUNT_LOCKED") {
+        toast.error(error.message, { pauseOnHover: false, autoClose: 5000 });
+      } else {
+        toast.error(error.message, { pauseOnHover: false });
+      }
     }
   };
 

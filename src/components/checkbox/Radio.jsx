@@ -16,9 +16,9 @@ const Radio = ({ checked, children, control, name, ...rest }) => {
         {...field}
         {...rest}
       />
-      <div className="flex items-center gap-x-3 font-medium cursor-pointer text-sm">
+      <div className="flex items-center gap-x-2 sm:gap-x-3 font-medium cursor-pointer text-xs sm:text-sm md:text-base">
         <div
-          className={`w-6 h-6 rounded-full border flex items-center justify-center p-1 ${
+          className={`w-5 sm:w-6 h-5 sm:h-6 rounded-full border flex items-center justify-center p-0.5 sm:p-1 ${
             checked
               ? "bg-[#1DC071] border-[#1DC071] text-white"
               : "border-gray-200 text-transparent"
@@ -26,7 +26,7 @@ const Radio = ({ checked, children, control, name, ...rest }) => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-4 sm:h-5 md:h-6 w-4 sm:w-5 md:w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

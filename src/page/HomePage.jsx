@@ -260,7 +260,7 @@ const HomePage = () => {
           <ProductListHome 
             data={newProducts} 
             bg="bg2" 
-            className="py-8 sm:py-12 md:py-16 lg:py-20" 
+            className="py-4 sm:py-6 md:py-8 lg:py-10" 
             title="Sản phẩm mới về"
             loading={loadingNewProducts}
           />

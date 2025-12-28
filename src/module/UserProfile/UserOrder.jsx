@@ -102,14 +102,14 @@ const UserOrder = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
         <DashboardHeading
           title="Quản lý đơn hàng"
-          className="px-5 py-5"
+          className="px-2 sm:px-4 py-2 sm:py-4"
         ></DashboardHeading>
-        <div className="flex items-center gap-x-3 flex-wrap">
+        <div className="flex items-center gap-x-1 sm:gap-x-2 flex-wrap w-full sm:w-auto">
           <button
-            className={`flex items-center gap-x-3 cursor-pointer py-2 px-4 text-base font-medium rounded-lg border border-gray-300 ${
+            className={`flex items-center gap-x-1 sm:gap-x-2 cursor-pointer py-1 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg border border-gray-300 transition-colors ${
               state === "All" || state === undefined
                 ? "bg-blue-500 text-white"
                 : ""
@@ -117,10 +117,10 @@ const UserOrder = () => {
             value="All"
             onClick={handleClick}
           >
-            Tất cả đơn hàng
+            Tất cả
           </button>
           <button
-            className={`flex items-center gap-x-3 cursor-pointer py-2 px-4 text-base font-medium rounded-lg border border-gray-300 ${
+            className={`flex items-center gap-x-1 sm:gap-x-2 cursor-pointer py-1 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg border border-gray-300 transition-colors ${
               state === "Processed" ? "bg-blue-500 text-white" : ""
             }`}
             value="Processed"
@@ -129,25 +129,25 @@ const UserOrder = () => {
             Chờ xác nhận
           </button>
           <button
-            className={`flex items-center gap-x-3 cursor-pointer py-2 px-4 text-base font-medium rounded-lg border border-gray-300 ${
+            className={`flex items-center gap-x-1 sm:gap-x-2 cursor-pointer py-1 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg border border-gray-300 transition-colors ${
               state === "Waiting Goods" ? "bg-blue-500 text-white" : ""
             }`}
             value="Waiting Goods"
             onClick={handleClick}
           >
-            Chờ lấy hàng
+            Chờ lấy
           </button>
           <button
-            className={`flex items-center gap-x-3 cursor-pointer py-2 px-4 text-base font-medium rounded-lg border border-gray-300 ${
+            className={`flex items-center gap-x-1 sm:gap-x-2 cursor-pointer py-1 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg border border-gray-300 transition-colors ${
               state === "Delivery" ? "bg-blue-500 text-white" : ""
             }`}
             value="Delivery"
             onClick={handleClick}
           >
-            Chờ giao hàng
+            Chờ giao
           </button>
           <button
-            className={`flex items-center gap-x-3 cursor-pointer py-2 px-4  text-base font-medium rounded-lg border border-gray-300 ${
+            className={`flex items-center gap-x-1 sm:gap-x-2 cursor-pointer py-1 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg border border-gray-300 transition-colors ${
               state === "Success" ? "bg-blue-500 text-white" : ""
             }`}
             value="Success"
@@ -156,7 +156,7 @@ const UserOrder = () => {
             Đã giao
           </button>
           <button
-            className={`flex items-center gap-x-3 cursor-pointer py-2 px-4 text-base font-medium rounded-lg border border-gray-300  ${
+            className={`flex items-center gap-x-1 sm:gap-x-2 cursor-pointer py-1 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg border border-gray-300 transition-colors ${
               state === "Cancelled" ? "bg-blue-500 text-white" : ""
             }`}
             value="Cancelled"
