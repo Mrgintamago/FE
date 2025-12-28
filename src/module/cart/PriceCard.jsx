@@ -6,12 +6,12 @@ const PriceCard = ({ data }) => {
   const hasDiscount = data.product.promotion && data.product.promotion < data.product.price;
   
   return (
-    <div className="flex flex-col items-end justify-center">
-      <span className="text-base font-semibold">
+    <div className="flex flex-col items-end justify-center gap-1">
+      <span className="text-base sm:text-lg font-bold text-red-600 break-words">
         {formatPrice(price)}
       </span>
       {hasDiscount && (
-        <span className="text-sm line-through">
+        <span className="text-xs sm:text-sm line-through text-slate-400">
           {formatPrice(data.product.price)}
         </span>
       )}

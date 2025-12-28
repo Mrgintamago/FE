@@ -141,16 +141,16 @@ const SubInformationProduct = ({ data }) => {
       {/* Price */}
       <div className="mb-4 sm:mb-6">
         <span className="text-xs sm:text-sm text-gray-600 mb-2 block">Giá:</span>
-        <div className="flex items-center gap-x-2 sm:gap-x-3 flex-wrap">
-        <span className="text-2xl sm:text-3xl font-bold text-red-600">
-          {formatPrice(data?.promotion || data?.price)}
-        </span>
+        <div className="flex items-center gap-x-3 sm:gap-x-4 flex-wrap">
+          <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-600 break-words">
+            {formatPrice(data?.promotion || data?.price)}
+          </span>
           {data?.promotion && data?.promotion < data?.price && (
             <>
               <span className="text-base sm:text-lg line-through text-slate-400">
                 {formatPrice(data?.price)}
               </span>
-              <span className="text-sm sm:text-base font-semibold text-blue-600">
+              <span className="text-sm sm:text-base font-semibold text-white bg-red-500 px-2.5 py-1 rounded-md">
                 -{data?.percent || Math.round(((data.price - data.promotion) * 100) / data.price)}%
               </span>
             </>

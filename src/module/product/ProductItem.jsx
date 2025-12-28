@@ -50,22 +50,20 @@ const ProductItem = ({
           </span>
         )}
         {product?.inventory > 4 && <span className="mb-8"></span>}
-        <div className="flex items-center justify-between text-sm mb-2">
-          <span className="text-lg sm:text-xl lg:text-2xl text-blue-700 font-semibold">
+        <div className="flex flex-col gap-1 mb-2">
+          <span className="text-lg sm:text-xl lg:text-2xl text-blue-700 font-bold break-words">
             {formatPrice(product?.promotion || product?.price)}
           </span>
-        </div>
-        <div className="flex items-center justify-between min-h-[20px]">
           {product?.promotion && product?.promotion < product?.price ? (
-            <div className="flex items-center flex-wrap gap-1">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="text-xs sm:text-sm line-through text-slate-400">
                 {formatPrice(product?.price)}
               </span>
-              <span className="text-blue text-xs sm:text-sm"> -{product?.percent || 0}%</span>
+              <span className="text-red-500 text-xs sm:text-sm font-semibold bg-red-50 px-2 py-0.5 rounded">
+                -{product?.percent || 0}%
+              </span>
             </div>
-          ) : (
-            <div></div>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
