@@ -1,8 +1,8 @@
-@import "reset";
-@import "product-images-slider";
-@import "accordion";
-@import "_content";
-@import "_custom-filter";
+@use "reset" as *;
+@use "product-images-slider" as *;
+@use "accordion" as *;
+@use "_content" as *;
+@use "_custom-filter" as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

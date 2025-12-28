@@ -238,11 +238,25 @@ const HomePage = () => {
               </div>
             )}
           </div>
-          <BestSellerListHome 
-            data={bestSeller} 
-            className="py-8 sm:py-12 md:py-16 lg:py-20" 
-            loading={loadingBestSeller}
-          />
+          
+          {/* Best Seller Section Title */}
+          <div className="bg-gradient-to-r from-gray-50 to-white py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 md:mb-16">
+            <div className="container mx-auto">
+              <div className="flex items-center gap-x-2 sm:gap-x-3">
+                <span className="w-2 h-6 sm:h-8 bg-red-600 rounded-full block flex-shrink-0" />
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Best Seller</h2>
+              </div>
+            </div>
+          </div>
+          
+          {/* Best Seller Carousel */}
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-10">
+            <BestSellerListHome 
+              data={bestSeller} 
+              className="animate-fade-in-up" 
+              loading={loadingBestSeller}
+            />
+          </div>
           <ProductListHome 
             data={newProducts} 
             bg="bg2" 

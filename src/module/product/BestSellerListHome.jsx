@@ -11,16 +11,8 @@ import SkeletonItem from "../../components/skeleton/SkeletonItem";
 const BestSellerListHome = ({ data, className = "", loading = false }) => {
   return (
     <div className={`${className} animate-fade-in-up`}>
-      {/* Title */}
-      <div className="container mb-4 sm:mb-6">
-        <div className="flex items-center gap-x-2 sm:gap-x-3">
-          <span className="w-2 h-6 sm:h-8 bg-red-600 rounded-full block" />
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800">Best Seller</h2>
-        </div>
-      </div>
-
-      {/* Carousel */}
-      <div className="container bg-[url('../images/bg.png')] bg-no-repeat w-full bg-cover rounded-lg shadow-lg overflow-hidden h-[460px]">
+      {/* Carousel Container - Pushed down */}
+      <div className="w-full bg-[url('../images/bg.png')] bg-no-repeat bg-cover rounded-lg shadow-lg overflow-hidden min-h-[420px] sm:min-h-[480px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 md:pt-24">
         {loading ? (
           <div className="p-5">
             <SkeletonItem className="sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5" totalItem={5} />
@@ -60,13 +52,14 @@ const BestSellerListHome = ({ data, className = "", loading = false }) => {
             }}
             navigation
             pagination={{ clickable: true }}
-            className="w-full rounded-lg"
+            className="w-full h-full py-8 sm:py-10"
           >
             {data && data.length > 0 &&
               data.map((item) => (
-                <SwiperSlide key={item._id || item.id}>
+                <SwiperSlide key={item._id || item.id} className="w-full flex items-center justify-center !h-auto">
                   <BestSellerItem
                     product={item}
+                    className="w-full"
                   />
                 </SwiperSlide>
               ))}
