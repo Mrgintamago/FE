@@ -36,22 +36,21 @@ const ProductItem = ({
         />
       </div>
       <div className="flex flex-col flex-1">
-        <h3 className="line-clamp-2 mb-2 text-xs sm:text-sm font-medium">
+        <h3 className="line-clamp-2 mb-2 text-xs sm:text-sm font-medium flex-1">
           {product?.title}
         </h3>
         {product?.inventory < 5 && product?.inventory > 0 && (
-          <span className="text-orange-500 font-medium mb-2 text-xs sm:text-sm">
+          <span className="text-orange-500 font-medium mb-1 text-xs sm:text-sm">
             Chỉ còn {product?.inventory}
           </span>
         )}
         {product?.inventory === 0 && (
-          <span className="text-orange-500 font-medium mb-2 text-xs sm:text-sm">
+          <span className="text-orange-500 font-medium mb-1 text-xs sm:text-sm">
             Hết hàng
           </span>
         )}
-        {product?.inventory > 4 && <span className="mb-8"></span>}
-        <div className="flex flex-col gap-1 mb-2">
-          <span className="text-lg sm:text-xl lg:text-2xl text-blue-700 font-bold break-words">
+        <div className="flex flex-col gap-1 mt-auto">
+          <span className="text-lg sm:text-xl lg:text-2xl text-red-600 font-bold break-words">
             {formatPrice(product?.promotion || product?.price)}
           </span>
           {product?.promotion && product?.promotion < product?.price ? (
