@@ -123,6 +123,24 @@ input::-webkit-inner-spin-button {
   border-radius: 8px;
 }
 
+// Custom scrollbar for cart
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #1DC071, #a4d96c);
+    border-radius: 10px;
+    &:hover {
+      background: linear-gradient(to bottom, #16a05a, #8fc85a);
+    }
+  }
+}
+
 // ProductDetailPage
 .ProductDetail {
   display: grid;
@@ -649,56 +667,96 @@ input[type="range"]::-webkit-slider-thumb {
 /* Swiper Product Carousel Styles */
 .swiper-container {
   padding-bottom: 50px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  position: relative;
 }
 
 .swiper-slide {
   display: flex;
   align-items: stretch;
   height: auto;
+  
+  // Đảm bảo các slide có cùng chiều cao
+  .product-card,
+  .best-seller-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-  background-color: rgba(220, 38, 38, 0.8);
-  width: 40px;
-  height: 40px;
+  background-color: rgba(220, 38, 38, 0.9);
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   color: white;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
   
   &:hover {
     background-color: rgba(220, 38, 38, 1);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
   
   &::after {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
   }
 }
 
+.swiper-button-prev {
+  left: 0 !important;
+}
+
+.swiper-button-next {
+  right: 0 !important;
+}
+
 .swiper-button-disabled {
-  opacity: 0.35;
-  background-color: rgba(220, 38, 38, 0.35) !important;
+  opacity: 0.3;
+  background-color: rgba(220, 38, 38, 0.3) !important;
   cursor: not-allowed;
+  transform: none !important;
+}
+
+.swiper-pagination {
+  bottom: 10px !important;
 }
 
 .swiper-pagination-bullet {
   background-color: rgba(220, 38, 38, 0.4);
-  width: 8px;
-  height: 8px;
-  margin: 0 4px;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  transition: all 0.3s ease;
   
   &.swiper-pagination-bullet-active {
     background-color: #dc2626;
+    width: 24px;
+    border-radius: 5px;
   }
 }
 
-/* Hide swiper controls on larger screens */
-@media (min-width: 768px) {
+/* Show navigation arrows on all screens */
+@media (max-width: 767px) {
+  .swiper-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
   .swiper-button-next,
-  .swiper-button-prev,
-  .swiper-pagination {
-    display: none;
+  .swiper-button-prev {
+    width: 36px;
+    height: 36px;
+    
+    &::after {
+      font-size: 14px;
+    }
   }
 }

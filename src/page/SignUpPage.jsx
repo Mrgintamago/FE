@@ -106,8 +106,8 @@ const SignUpPage = () => {
   };
 
   return (
-    <AuthenticationPage>
-      <form autoComplete="off" onSubmit={handleSubmit(handleSignUp)}>
+    <AuthenticationPage subtitle="Tạo tài khoản mới để bắt đầu mua sắm">
+      <form autoComplete="off" onSubmit={handleSubmit(handleSignUp)} className="space-y-5">
         <Field>
           <Label htmlFor="fullname">Họ tên</Label>
           <Input
@@ -117,7 +117,7 @@ const SignUpPage = () => {
             control={control}
           />
           {errors.fullname && (
-            <p className="text-red-500 text-base font-medium">
+            <p className="text-red-500 text-sm font-medium mt-1 animate-fade-in">
               {errors.fullname?.message}
             </p>
           )}
@@ -132,7 +132,7 @@ const SignUpPage = () => {
             control={control}
           />
           {errors.email && (
-            <p className="text-red-500 text-base font-medium">
+            <p className="text-red-500 text-sm font-medium mt-1 animate-fade-in">
               {errors.email?.message}
             </p>
           )}
@@ -142,7 +142,7 @@ const SignUpPage = () => {
           <Label htmlFor="password">Mật khẩu</Label>
           <InputPasswordToggle control={control}></InputPasswordToggle>
           {errors.password && (
-            <p className="text-red-500 text-base font-medium">
+            <p className="text-red-500 text-sm font-medium mt-1 animate-fade-in">
               {errors.password?.message}
             </p>
           )}
@@ -155,7 +155,7 @@ const SignUpPage = () => {
             name="retypePassword"
           ></InputPasswordToggle>
           {errors.retypePassword && (
-            <p className="text-red-500 text-base font-medium">
+            <p className="text-red-500 text-sm font-medium mt-1 animate-fade-in">
               {errors.retypePassword?.message}
             </p>
           )}
@@ -180,7 +180,7 @@ const SignUpPage = () => {
                 </button>
               </label>
               {errors.term && (
-                <p className="text-red-500 text-base font-medium mt-1">
+                <p className="text-red-500 text-sm font-medium mt-1 animate-fade-in">
                   {errors.term?.message}
                 </p>
               )}
@@ -194,25 +194,25 @@ const SignUpPage = () => {
           disable={isSubmitting}
           style={{
             width: "100%",
-            maxWidth: 250,
-            margin: "20px auto",
-            height: "44px",
+            height: "48px",
+            marginTop: "24px",
           }}
         >
-          Đăng ký
+          {isSubmitting ? "Đang đăng ký..." : "Đăng ký"}
         </Button>
-      </form>
-      <Field>
-        <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-center mx-auto pb-10 gap-1 sm:gap-2">
-          {" "}
-          <span className="text-black text-xs sm:text-sm md:text-base">
-            Bạn đã có tài khoản?
+
+        <div className="text-center pt-4">
+          <span className="text-sm text-gray-600">
+            Bạn đã có tài khoản?{" "}
+            <Link
+              to="/sign-in"
+              className="text-[#1DC071] font-semibold hover:text-[#16a05a] hover:underline transition-all"
+            >
+              Đăng nhập ngay
+            </Link>
           </span>
-          <Link to="/sign-in" className="text-sm sm:text-base md:text-lg text-[#1DC071] font-semibold">
-            Đăng nhập
-          </Link>
         </div>
-      </Field>
+      </form>
 
       {/* Terms Modal */}
       {showTerms && (

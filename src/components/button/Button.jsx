@@ -15,6 +15,8 @@ const ButtonStyles = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  transition: all 0.3s ease;
 
   @media (max-width: 640px) {
     font-size: 14px;
@@ -39,6 +41,10 @@ const ButtonStyles = styled.button`
     css`
       color: #1dc071;
       background-color: white;
+      border: 2px solid #1dc071;
+      &:hover {
+        background-color: #f0fdf4;
+      }
     `};
 
   ${(props) =>
@@ -46,11 +52,20 @@ const ButtonStyles = styled.button`
     css`
       color: white;
       background-image: linear-gradient(to right bottom, #1dc071, #a4d96c);
+      &:hover {
+        background-image: linear-gradient(to right bottom, #16a05a, #8fc85a);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(29, 192, 113, 0.4);
+      }
+      &:active {
+        transform: translateY(0);
+      }
     `};
 
   &:disabled {
     opacity: 0.5;
     pointer-events: none;
+    cursor: not-allowed;
   }
 `;
 const Button = ({

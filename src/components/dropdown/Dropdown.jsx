@@ -92,9 +92,15 @@ const Dropdown = () => {
           // Call logout API FIRST to blacklist token on backend
           await userApi.logout();
         } catch (error) {
-          console.error("Logout API error:", error);
+          // If logout API fails (e.g., token expired), still proceed with frontend logout
+          // This is expected behavior - token might already be expired
+          if (error.message && error.message.includes("hết hạn")) {
+            console.log("Token đã hết hạn, tiếp tục đăng xuất ở frontend");
+          } else {
+            console.error("Logout API error:", error);
+          }
         } finally {
-          // Then clear frontend state
+          // Always clear frontend state regardless of API call result
           const action = logout();
           dispatch(action);
           navigate("/");

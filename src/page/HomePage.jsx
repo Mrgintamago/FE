@@ -153,11 +153,11 @@ const HomePage = () => {
       {status === action_status.SUCCEEDED && (
         <>
           <Banner />
-          <div className="container px-4 sm:px-6 mt-6 sm:mt-8 lg:mt-10 animate-fade-in-up">
-            <div className="flex items-center justify-between mb-4 sm:mb-6 flex-wrap gap-2 sm:gap-3">
+          <div className="container px-4 sm:px-6 mt-4 sm:mt-6 lg:mt-8 animate-fade-in-up">
+            <div className="flex items-center justify-between mb-3 sm:mb-4 flex-wrap gap-2 sm:gap-3">
               <div className="flex items-center gap-x-2 sm:gap-x-3">
-                <span className="w-1 sm:w-2 h-6 sm:h-8 bg-red-600 rounded-full block" />
-                <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800">Tin tức & Bài báo</h2>
+                <span className="w-2 h-6 sm:h-7 bg-red-600 rounded-full block flex-shrink-0" />
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Tin tức & Bài báo</h2>
               </div>
               <button
                 className="text-xs sm:text-sm md:text-base text-red-600 font-semibold hover:text-red-700 smooth-transition flex items-center gap-x-1"
@@ -239,31 +239,29 @@ const HomePage = () => {
             )}
           </div>
           
-          {/* Best Seller Section Title */}
-          <div className="bg-gradient-to-r from-gray-50 to-white py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 md:mb-16">
-            <div className="container mx-auto">
-              <div className="flex items-center gap-x-2 sm:gap-x-3">
-                <span className="w-2 h-6 sm:h-8 bg-red-600 rounded-full block flex-shrink-0" />
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Best Seller</h2>
-              </div>
+          {/* Best Seller Section */}
+          <div className="container px-4 sm:px-6 mt-4 sm:mt-6 lg:mt-8 animate-fade-in-up">
+            <div className="flex items-center gap-x-2 sm:gap-x-3 mb-3 sm:mb-4">
+              <span className="w-2 h-6 sm:h-7 bg-red-600 rounded-full block flex-shrink-0" />
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Best Seller</h2>
             </div>
-          </div>
-          
-          {/* Best Seller Carousel */}
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-10">
             <BestSellerListHome 
               data={bestSeller} 
               className="animate-fade-in-up" 
               loading={loadingBestSeller}
             />
           </div>
-          <ProductListHome 
-            data={newProducts} 
-            bg="bg2" 
-            className="py-4 sm:py-6 md:py-8 lg:py-10" 
-            title="Sản phẩm mới về"
-            loading={loadingNewProducts}
-          />
+          
+          {/* New Products Section */}
+          <div className="container px-4 sm:px-6 mt-4 sm:mt-6 lg:mt-8 animate-fade-in-up">
+            <ProductListHome 
+              data={newProducts} 
+              bg="bg2" 
+              className="" 
+              title="Sản phẩm mới về"
+              loading={loadingNewProducts}
+            />
+          </div>
           <ProductList
             data={product}
             handlePageClick={handlePageClick}
