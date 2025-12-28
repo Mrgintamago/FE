@@ -32,7 +32,7 @@ const userApi = {
   },
   logout() {
     const url = "/api/v1/users/logout";
-    return axiosClient.get(url);
+    return axiosClient.post(url);
   },
   verifyResetPassword(data) {
     const url = "/api/v1/users/verifyResetPass";
