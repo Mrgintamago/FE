@@ -1,0 +1,21 @@
+export const seriesData = [
+  { id: 1, name: "Dragon Ball", value: "Dragon Ball" },
+  { id: 2, name: "One Piece", value: "One Piece" },
+  { id: 3, name: "Naruto", value: "Naruto" },
+  { id: 4, name: "Bleach", value: "Bleach" },
+  { id: 5, name: "Pokemon", value: "Pokemon" },
+  { id: 6, name: "Genshin Impact", value: "Genshin Impact" },
+  { id: 7, name: "Fig Nữ", value: "Fig Nữ" },
+  { id: 8, name: "Kimetsu No Yaiba", value: "Kimetsu No Yaiba" },
+  { id: 9, name: "DC/Marvel", value: "DC/Marvel" },
+  { id: 10, name: "Chainsaw Man", value: "Chainsaw Man" },
+  { id: 11, name: "Attack On Titan", value: "Attack On Titan" },
+  { id: 12, name: "Yu-gi Oh", value: "Yu-gi Oh" },
+  { id: 13, name: "Slam Dunk", value: "Slam Dunk" },
+  { id: 14, name: "One Punch Man", value: "One Punch Man" },
+  { id: 15, name: "Spirited Away", value: "Spirited Away" },
+  { id: 16, name: "Jujutsu Kaisen", value: "Jujutsu Kaisen" },
+  { id: 17, name: "Honkai Impact", value: "Honkai Impact" },
+  { id: 18, name: "Các bộ Anime khác", value: "Other" },
+];
+

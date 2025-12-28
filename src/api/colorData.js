@@ -1,0 +1,17 @@
+export const colorData = [
+  { id: 1, name: "Đen", hex: "#000000" },
+  { id: 2, name: "Vàng", hex: "#FFD700" },
+  { id: 3, name: "Trắng", hex: "#FFFFFF" },
+  { id: 4, name: "Bạc", hex: "#C0C0C0" },
+  { id: 5, name: "Đỏ", hex: "#FF0000" },
+  { id: 6, name: "Xanh dương", hex: "#0000FF" },
+  { id: 7, name: "Xanh lá", hex: "#00FF00" },
+  { id: 8, name: "Hồng", hex: "#FF69B4" },
+  { id: 9, name: "Tím", hex: "#800080" },
+  { id: 10, name: "Cam", hex: "#FFA500" },
+  { id: 11, name: "Nâu", hex: "#8B4513" },
+  { id: 12, name: "Xám", hex: "#808080" },
+  { id: 13, name: "Xanh ngọc", hex: "#00CED1" },
+  { id: 14, name: "Vàng nhạt", hex: "#FFFFE0" },
+  { id: 15, name: "Xanh đậm", hex: "#00008B" },
+];

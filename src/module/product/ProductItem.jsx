@@ -1,0 +1,75 @@
+import React from "react";
+import { formatPrice } from "../../utils/formatPrice";
+const ProductItem = ({
+  product,
+  onClickItem,
+  className = "",
+}) => {
+  // Kiểm tra giá sản phẩm có >= 800.000 không để hiển thị icon miễn phí giao hàng
+  const productPrice = product?.promotion || product?.price || 0;
+  const isFreeShipping = productPrice >= 800000;
+
+  return (
+    <div
+      className={`product-card flex flex-col rounded-lg p-3 bg-white h-full mx-2 cursor-pointer relative ${className}`}
+      onClick={onClickItem}
+    >
+      {product?.productType === "pre-order" && (
+        <div className="absolute top-2 left-2 z-10 bg-red-600 text-white px-3 py-1 rounded-md text-xs font-bold shadow-lg">
+          Pre-order
+        </div>
+      )}
+      {isFreeShipping && (
+        <div className="absolute bottom-2 right-2 z-10 bg-green-600 text-white px-3 py-1 rounded-md text-xs font-bold shadow-lg">
+          Freeship
+        </div>
+      )}
+      <div className="overflow-hidden rounded-lg mb-2 relative">
+        <img
+          src={
+            product?.images[0] ||
+            "https://lh3.googleusercontent.com/ZQFbZeosDa1ODQnaaunB72fejXPcl_hg7rfEcgVlZSkgtOTAHQH1M4RxVrH2cLN6gjqJvOAq1b8CeE92gjqDN2W3b2HsMkxb=rw"
+          }
+          alt={product?.title || "Product image"}
+          className="product-image w-full h-[220px] sm:h-[240px] lg:h-[280px] object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div className="flex flex-col flex-1">
+        <h3 className="line-clamp-2 mb-2 text-xs sm:text-sm font-medium">
+          {product?.title}
+        </h3>
+        {product?.inventory < 5 && product?.inventory > 0 && (
+          <span className="text-orange-500 font-medium mb-2 text-xs sm:text-sm">
+            Chỉ còn {product?.inventory}
+          </span>
+        )}
+        {product?.inventory === 0 && (
+          <span className="text-orange-500 font-medium mb-2 text-xs sm:text-sm">
+            Hết hàng
+          </span>
+        )}
+        {product?.inventory > 4 && <span className="mb-8"></span>}
+        <div className="flex items-center justify-between text-sm mb-2">
+          <span className="text-lg sm:text-xl lg:text-2xl text-blue-700 font-semibold">
+            {formatPrice(product?.promotion || product?.price)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between min-h-[20px]">
+          {product?.promotion && product?.promotion < product?.price ? (
+            <div className="flex items-center flex-wrap gap-1">
+              <span className="text-xs sm:text-sm line-through text-slate-400">
+                {formatPrice(product?.price)}
+              </span>
+              <span className="text-blue text-xs sm:text-sm"> -{product?.percent || 0}%</span>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductItem;
