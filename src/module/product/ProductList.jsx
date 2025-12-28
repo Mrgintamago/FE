@@ -14,7 +14,7 @@ const ProductList = ({ data, handlePageClick, page, totalPage }) => {
 
   return (
     <>
-      <div className="mt-20 animate-fade-in-up">
+      <div className="mt-32 md:mt-40 animate-fade-in-up">
         <div className="flex flex-col container rounded-lg bg-white shadow-lg overflow-hidden">
           <div className="flex items-center justify-between p-5 bg-red-800 rounded-t-lg">
             <span className="shop-name-white text-3xl font-bold animate-slide-in-left">Figure</span>

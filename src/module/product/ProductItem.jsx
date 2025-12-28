@@ -36,7 +36,7 @@ const ProductItem = ({
         />
       </div>
       <div className="flex flex-col flex-1">
-        <h3 className="line-clamp-2 mb-2 text-xs sm:text-sm font-medium flex-1">
+        <h3 className="line-clamp-2 mb-2 text-[10px] xs:text-xs sm:text-sm font-medium flex-1">
           {product?.title}
         </h3>
         {product?.inventory < 5 && product?.inventory > 0 && (
