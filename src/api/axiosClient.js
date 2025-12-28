@@ -89,6 +89,13 @@ axiosClient.interceptors.response.use(
       return Promise.reject(error);
     }
     const { config, status, data } = error.response;
+    
+    // SPECIAL: Logout should ALWAYS succeed, even with 401/errors
+    if (config.url === "/api/v1/users/logout") {
+      // Always resolve logout as success to allow clearing frontend state
+      return Promise.resolve(data || { status: 'success', message: 'Logged out' });
+    }
+    
     const URLs = [
       "/api/v1/users/signup",
       "/api/v1/users/login",
