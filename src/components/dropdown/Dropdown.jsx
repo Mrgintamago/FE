@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { logout } from "../../redux/auth/userSlice";
 import { useDispatch } from "react-redux";
 import userApi from "../../api/userApi";
+import axiosClient from "../../api/axiosClient";
 const DropdownStyles = styled.div`
   width: 300px;
   background-color: white;
@@ -88,24 +89,40 @@ const Dropdown = () => {
       cancelButtonText: "Không",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // Clear frontend state FIRST (before API call) to prevent token from being sent
+        console.log("🔄 Clearing frontend state...");
+        
+        // Remove token from localStorage IMMEDIATELY
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("user");
+        localStorage.removeItem("tokenStream");
+        sessionStorage.removeItem("jwt");
+        sessionStorage.removeItem("user");
+        
+        // Remove Authorization header from axiosClient IMMEDIATELY
+        delete axiosClient.defaults.headers.common["Authorization"];
+        console.log("✅ Token and header cleared immediately");
+        
+        // Now call logout API (no token will be sent)
         try {
-          // Call logout API FIRST to blacklist token on backend
-          await userApi.logout();
+          const logoutResponse = await userApi.logout();
+          console.log("✅ Logout API response:", logoutResponse);
         } catch (error) {
-          // If logout API fails (e.g., token expired), still proceed with frontend logout
-          // This is expected behavior - token might already be expired
-          if (error.message && error.message.includes("hết hạn")) {
-            console.log("Token đã hết hạn, tiếp tục đăng xuất ở frontend");
-          } else {
-            console.error("Logout API error:", error);
-          }
-        } finally {
-          // Always clear frontend state regardless of API call result
-          const action = logout();
-          dispatch(action);
-          navigate("/");
-          Swal.fire("Tạm biệt! Hẹn gặp lại quý khách");
+          console.error("⚠️ Logout API error:", error);
         }
+        
+        // Clear Redux state
+        const action = logout();
+        dispatch(action);
+        console.log("✅ Redux state cleared");
+        
+        // Navigate to home
+        navigate("/");
+        
+        // Show success message
+        setTimeout(() => {
+          Swal.fire("Tạm biệt! Hẹn gặp lại quý khách");
+        }, 300);
       }
     });
   };
