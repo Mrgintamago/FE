@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../../api/userApi";
+import axiosClient from "../../api/axiosClient";
 import { action_status } from "../../utils/constants/status";
 import StorageKeys from "../../utils/constants/storage-keys";
 import { fetchCSRFToken } from "../../api/axiosClient";
@@ -207,9 +208,7 @@ const userSlice = createSlice({
       sessionStorage.removeItem("tokenStream");
       
       // Remove Authorization header from axios
-      import("../../api/axiosClient").then(({ default: axiosClient }) => {
-        delete axiosClient.defaults.headers.common["Authorization"];
-      });
+      delete axiosClient.defaults.headers.common["Authorization"];
       
       state.current = null;
     },
