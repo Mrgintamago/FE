@@ -2,9 +2,6 @@ import axios from "axios";
 
 const apiBaseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-console.log("📡 API Base URL:", apiBaseURL);
-console.log("🌍 Environment:", import.meta.env.MODE);
-
 const axiosClient = axios.create({
   baseURL: apiBaseURL,
   headers: {
@@ -18,7 +15,9 @@ const axiosClient = axios.create({
 const initialToken = localStorage.getItem("jwt");
 if (initialToken) {
   axiosClient.defaults.headers.common["Authorization"] = `Bearer ${initialToken}`;
-  console.log("🔐 Initial token set to axios defaults");
+  if (import.meta.env.DEV) {
+    console.log("🔐 Initial token set to axios defaults");
+  }
 }
 
 // Store CSRF token
@@ -31,7 +30,9 @@ export const fetchCSRFToken = async () => {
     csrfToken = response.csrfToken;
     return csrfToken;
   } catch (error) {
-    console.error("Error fetching CSRF token:", error.message);
+    if (import.meta.env.DEV) {
+      console.error("Error fetching CSRF token:", error.message);
+    }
     return null;
   }
 };
@@ -45,10 +46,14 @@ axiosClient.interceptors.request.use(
     const token = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
     if (token && token !== "undefined") {
       config.headers.Authorization = `Bearer ${token}`;
-      console.debug("✅ Token attached to request:", config.method?.toUpperCase(), config.url, "| Token preview:", token.substring(0, 20) + "...");
+      if (import.meta.env.DEV) {
+        console.debug("✅ Token attached to request:", config.method?.toUpperCase(), config.url, "| Token preview:", token.substring(0, 20) + "...");
+      }
     } else {
-      console.debug("⚠️ No token found for request:", config.method?.toUpperCase(), config.url);
-      console.debug("📦 localStorage keys:", Object.keys(localStorage));
+      if (import.meta.env.DEV) {
+        console.debug("⚠️ No token found for request:", config.method?.toUpperCase(), config.url);
+        console.debug("📦 localStorage keys:", Object.keys(localStorage));
+      }
     }
 
     // SECURITY: Gắn CSRF token từ cookie hoặc memory cho state-changing requests
@@ -132,7 +137,9 @@ axiosClient.interceptors.response.use(
       status == 403
     ) {
       // Create enhanced error with additional login-specific information
-      const enhancedError = new Error(data.message);
+      // In production, only pass generic message
+      const message = import.meta.env.DEV ? data.message : "Có lỗi xảy ra. Vui lòng thử lại.";
+      const enhancedError = new Error(message);
       enhancedError.code = data.code;
       enhancedError.remainingAttempts = data.remainingAttempts;
       enhancedError.lockUntilMinutes = data.lockUntilMinutes;

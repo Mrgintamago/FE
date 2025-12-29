@@ -75,6 +75,11 @@ const SubInformationProduct = ({ data }) => {
 
   const handleQuantityChange = (delta) => {
     const newQuantity = Math.max(1, quantity + delta);
+    // Không cho phép mua nhiều hơn số lượng có sẵn
+    if (newQuantity > data?.inventory) {
+      toast.error(`Chỉ còn ${data?.inventory} sản phẩm`);
+      return;
+    }
     setQuantity(newQuantity);
   };
 

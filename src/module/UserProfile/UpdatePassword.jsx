@@ -9,9 +9,10 @@ import * as yup from "yup";
 import Button from "../../components/button/Button";
 import userApi from "../../api/userApi";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../redux/auth/userSlice";
 
 const schema = yup.object({
   passwordCurrent: yup
@@ -52,6 +53,7 @@ const UpdatePassword = () => {
 
   const { current } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (current === null) {
@@ -66,15 +68,63 @@ const UpdatePassword = () => {
     try {
       const response = await userApi.updatePassword(values);
       toast.dismiss();
-      toast.success("Đổi mật khẩu thành công");
-      reset({
-        passwordConfirm: "",
-        password: "",
-        passwordCurrent: "",
-      });
+      
+      // Only log in development
+      if (import.meta.env.DEV) {
+        console.log("[UPDATE PASSWORD] Response:", response);
+      }
+      
+      // Check if server requires user to login again after password change
+      if (response && response.requireLogin) {
+        toast.warning("Mật khẩu đã được cập nhật. Vui lòng đăng nhập lại.", {
+          autoClose: 2000,
+          pauseOnHover: false,
+        });
+        
+        // Dispatch logout action to clear Redux state
+        dispatch(logout());
+        
+        // Clear localStorage and sessionStorage
+        localStorage.clear();
+        sessionStorage.clear();
+        
+        // Redirect to login page after logout completes
+        setTimeout(() => {
+          navigate("/sign-in");
+        }, 1500);
+      } else {
+        toast.success("Đổi mật khẩu thành công", { pauseOnHover: false });
+        reset({
+          passwordConfirm: "",
+          password: "",
+          passwordCurrent: "",
+        });
+      }
     } catch (error) {
       toast.dismiss();
-      toast.error(error.message);
+      if (import.meta.env.DEV) {
+        console.error("[UPDATE PASSWORD] Error:", error);
+      }
+      
+      // If error indicates token is invalid/expired, force logout
+      if (error.message && (error.message.includes("401") || error.message.includes("Token"))) {
+        toast.error("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.", {
+          autoClose: 2000,
+          pauseOnHover: false,
+        });
+        dispatch(logout());
+        localStorage.clear();
+        sessionStorage.clear();
+        setTimeout(() => {
+          navigate("/sign-in");
+        }, 1500);
+      } else {
+        // Show generic error message in production, detailed in development
+        const errorMessage = import.meta.env.DEV 
+          ? (error.message || "Có lỗi xảy ra") 
+          : "Có lỗi xảy ra. Vui lòng thử lại.";
+        toast.error(errorMessage, { pauseOnHover: false });
+      }
     }
   };
   return (

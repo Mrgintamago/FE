@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Header from "./components/header/Header";
@@ -21,6 +21,7 @@ import PaymentPage from "./module/payment/PaymentPage";
 import ProductFilterPage from "./page/ProductFilterPage";
 import PaymentCash from "./module/payment/PaymentCash";
 import PaymentBank from "./module/payment/PaymentBank";
+import PaymentResult from "./page/PaymentResult";
 import InformationDetailOrder from "./module/UserProfile/InformationDetailOrder";
 import Navbar from "./components/navbar/Navbar";
 // PayPal removed - using PayOS instead
@@ -38,6 +39,27 @@ import PartnersApplyPage from "./page/partners/PartnersApplyPage";
 import PartnersContactPage from "./page/partners/PartnersContactPage";
 import SnowEffect from "./components/snow/SnowEffect";
 import { fetchCSRFToken } from "./api/axiosClient";
+import { toast } from "react-toastify";
+
+// ProtectedRoute Component - Inline để không cần file riêng
+function ProtectedRoute({ children, requiredRoles = [] }) {
+  const { current: currentUser } = useSelector((state) => state.user);
+
+  // Kiểm tra đã đăng nhập chưa
+  if (!currentUser) {
+    toast.warning("Vui lòng đăng nhập để truy cập trang này");
+    return <Navigate to="/sign-in" replace />;
+  }
+
+  // Kiểm tra role nếu có yêu cầu
+  if (requiredRoles.length > 0 && !requiredRoles.includes(currentUser.role)) {
+    toast.error("Bạn không có quyền truy cập trang này");
+    return <Navigate to="/" replace />;
+  }
+
+  // Tất cả kiểm tra đã pass, render component
+  return children;
+}
 
 function App() {
   const { current: currentUser } = useSelector((state) => state.user);
@@ -71,7 +93,13 @@ function App() {
                 path="/forgot-password"
                 element={<ForgotPasswordPage />}
               ></Route>
-              <Route element={<DashboardLayout />}>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout />
+                  </ProtectedRoute>
+                }
+              >
                 <Route path="/account" element={<UserAccount />}></Route>
                 <Route path="/account/orders" element={<UserOrder />}></Route>
                 <Route
@@ -90,6 +118,8 @@ function App() {
               <Route path="/product" element={<ProductFilterPage />}></Route>
               <Route path="/payment-cash" element={<PaymentCash />}></Route>
               <Route path="/payment-bank" element={<PaymentBank />}></Route>
+              <Route path="/payment-result" element={<PaymentResult />}></Route>
+              <Route path="/order/:id" element={<InformationDetailOrder />}></Route>
               <Route path="/support/help-center" element={<HelpCenterPage />}></Route>
               <Route path="/about/us" element={<AboutUsPage />}></Route>
               <Route path="/about/company" element={<CompanyPage />}></Route>
